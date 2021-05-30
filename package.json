@@ -54,7 +54,9 @@
   },
   "peerDependencies": {},
   "dependencies": {
-    "debug": "^4.3.1",
+    "chalk": "^4.1.1",
+    "execa": "^5.0.0",
+    "npm-run-path": "^4.0.1",
     "vite": "^2.3.4"
   }
 }
