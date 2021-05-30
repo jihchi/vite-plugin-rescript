@@ -6,7 +6,7 @@ export interface VitePluginReScript {}
 const debug = Debug('@jihchi/vite-plugin-rescript');
 
 export default function createReScriptPlugin(
-  options: VitePluginReScript
+  options?: VitePluginReScript
 ): Plugin {
   debug('options:', options);
   return {
