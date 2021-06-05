@@ -6,6 +6,13 @@
   "main": "dist/index.js",
   "module": "dist/vite-plugin-rescript.esm.js",
   "typings": "dist/index.d.ts",
+  "keywords": [
+    "rollup-plugin",
+    "vite-plugin",
+    "ReScript",
+    "ReasonML",
+    "BuckleScript"
+  ],
   "files": [
     "dist",
     "src"
@@ -43,6 +50,12 @@
       "limit": "10 KB"
     }
   ],
+  "dependencies": {
+    "chalk": "^4.1.1",
+    "execa": "^5.0.0",
+    "npm-run-path": "^4.0.1",
+    "vite": "^2.3.4"
+  },
   "devDependencies": {
     "@size-limit/preset-small-lib": "^4.11.0",
     "@types/debug": "^4.1.5",
@@ -52,11 +65,7 @@
     "tslib": "^2.2.0",
     "typescript": "^4.3.2"
   },
-  "peerDependencies": {},
-  "dependencies": {
-    "chalk": "^4.1.1",
-    "execa": "^5.0.0",
-    "npm-run-path": "^4.0.1",
-    "vite": "^2.3.4"
+  "peerDependencies": {
+    "rescript": "^9.1.3"
   }
 }
