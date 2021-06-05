@@ -1,7 +1,7 @@
 {
   "name": "@jihchi/vite-plugin-rescript",
   "author": "jihchi",
-  "version": "0.2.0",
+  "version": "1.0.0",
   "license": "MIT",
   "main": "dist/index.js",
   "module": "dist/vite-plugin-rescript.esm.js",
