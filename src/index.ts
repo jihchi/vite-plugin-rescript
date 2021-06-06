@@ -3,34 +3,51 @@ import execa from 'execa';
 import npmRunPath from 'npm-run-path';
 import chalk from 'chalk';
 
-export interface VitePluginReScript {
-  cmd?: string;
-}
-
 const logPrefix = chalk.cyan('[@jihchi/vite-plugin-rescript]');
 
-export default function createReScriptPlugin(
-  options?: VitePluginReScript
-): Plugin {
-  const cmd = options?.cmd ?? 'rescript build -with-deps -w';
+async function launchReScript(watch: boolean) {
+  const cmd = watch
+    ? 'rescript build -with-deps -w'
+    : 'rescript build -with-deps';
+
+  const result = execa.command(cmd, {
+    env: npmRunPath.env(),
+    extendEnv: true,
+    shell: true,
+    windowsHide: false,
+    cwd: process.cwd(),
+  });
+
+  let compileOnce = (_value: unknown) => {};
+
+  function dataListener(chunk: any) {
+    const output = chunk.toString().trimEnd();
+    console.log(logPrefix, output);
+    if (watch && output.includes('>>>> Finish compiling')) {
+      compileOnce(true);
+    }
+  }
+
+  const { stdout, stderr } = result;
+  stdout && stdout.on('data', dataListener);
+  stderr && stderr.on('data', dataListener);
+
+  if (watch) {
+    await new Promise(resolve => {
+      compileOnce = resolve;
+    });
+  } else {
+    await result;
+  }
+
+  return;
+}
+
+export default function createReScriptPlugin(): Plugin {
   return {
     name: '@jihchi/vite-plugin-rescript',
-    async buildStart() {
-      const subprocess = execa.command(cmd, {
-        env: npmRunPath.env(),
-        extendEnv: true,
-        shell: true,
-        windowsHide: false,
-        cwd: process.cwd(),
-      });
-
-      function dataListener(chunk: any) {
-        console.log(logPrefix, chunk.toString().trimEnd());
-      }
-
-      const { stdout, stderr } = subprocess;
-      stdout && stdout.on('data', dataListener);
-      stderr && stderr.on('data', dataListener);
+    async configResolved(resolvedConfig) {
+      await launchReScript(resolvedConfig.command === 'serve');
     },
   };
 }
