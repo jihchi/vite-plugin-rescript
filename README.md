@@ -3,8 +3,8 @@
 [![Workflows - CI][workflows-ci-shield]][workflows-ci-url]
 [![npm package][npm-package-shield]][npm-package-url]
 [![bundlephobia size][bundlephobia-size-shield]][bundlephobia-size-url]
-[![npm download per month][npm-download-shield]][npm-package-url]
-[![npm license][npm-licence-shield]][npm-package-url]
+![npm download per month][npm-download-shield]
+[![npm license][npm-licence-shield]](./LICENSE)
 
 ## Getting Started
 
@@ -38,4 +38,4 @@ export default defineConfig({
 [npm-download-shield]: https://img.shields.io/npm/dm/@jihchi/vite-plugin-rescript
 [npm-licence-shield]: https://img.shields.io/npm/l/@jihchi/vite-plugin-rescript
 [bundlephobia-size-shield]: https://img.shields.io/bundlephobia/min/@jihchi/vite-plugin-rescript
-[bundlephobia-size-url]: https://bundlephobia.com/package/@jihchi/vite-plugin-rescript@1.1.1
+[bundlephobia-size-url]: https://bundlephobia.com/package/@jihchi/vite-plugin-rescript
