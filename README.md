@@ -8,6 +8,8 @@
 
 ## Getting Started
 
+> If you are looking for a template to quickly start a project using Vite, ReScript and React, take a look at [vitejs-template-react-rescript](https://github.com/jihchi/vitejs-template-react-rescript), the template depends on this plugin.
+
 ### npm
 
 ```sh
