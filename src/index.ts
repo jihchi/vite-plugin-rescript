@@ -47,7 +47,13 @@ export default function createReScriptPlugin(): Plugin {
   return {
     name: '@jihchi/vite-plugin-rescript',
     async configResolved(resolvedConfig) {
-      await launchReScript(resolvedConfig.command === 'serve');
+      const { command, mode } = resolvedConfig;
+      const needReScript =
+        (command === 'serve' && mode === 'development') || command === 'build';
+
+      if (needReScript) {
+        await launchReScript(command === 'serve');
+      }
     },
   };
 }
