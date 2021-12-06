@@ -7,13 +7,13 @@ const fileAndRangeRegex = /(.+):(\d+):(\d+)(-(\d+)(:(\d+))?)?$/;
 const codeRegex = /^  +([0-9]+| +|\.) (│|┆)/;
 
 // Compiler can treat warnings as hard errors based on `warnings` object in bsconfig.json
-const warningAsErrorRegex = /Warning number \d+ \(configured as error\)/;
+const warningErrorRegex = /Warning number \d+ \(configured as error\)/;
 
 // Returns true if the line indicates the start of an error block
 function isErrorLine(line: string) {
   if (line.startsWith("  We've found a bug for you!")) return true;
   if (line.startsWith('  Syntax error!')) return true;
-  if (warningAsErrorRegex.test(line)) return true;
+  if (warningErrorRegex.test(line)) return true;
   return false;
 }
 
@@ -22,7 +22,7 @@ export default function parseErrorLog(log: string) {
   const lines = log.split(EOL).filter(Boolean);
 
   // Optimization; only parse log when compiler is done
-  if (lines[lines.length - 1].startsWith('#Done(')) {
+  if (lines[lines.length - 1]?.startsWith('#Done(')) {
     let foundError = false;
     let path = '';
     let startLine = 0;
