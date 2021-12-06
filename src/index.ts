@@ -56,22 +56,6 @@ export default function createReScriptPlugin(): Plugin {
         await launchReScript(command === 'serve' || Boolean(build.watch));
       }
     },
-    config: () => ({
-      server: {
-        watch: {
-          // Only watch for changes to the actual compiled js files, except the
-          // ".compiler.log" file which is needed for showing the error overlay.
-          // JS is not outputted when the compiler errors, but the rescript files
-          // would still trigger an update. That is why they are ignored here.
-          ignored: [
-            '**/*.res',
-            '**/*.resi',
-            '**/lib/bs',
-            '!**/lib/bs/.compiler.log',
-          ],
-        },
-      },
-    }),
     configureServer(server) {
       // Manually find and parse log file after server start since
       // initial compilation does not trigger handleHotUpdate.
