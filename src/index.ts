@@ -56,6 +56,14 @@ export default function createReScriptPlugin(): Plugin {
         await launchReScript(command === 'serve' || Boolean(build.watch));
       }
     },
+    config: () => ({
+      server: {
+        watch: {
+          // Ignore rescript files when watching since they may occasionally trigger hot update
+          ignored: ['**/*.res', '**/*.resi'],
+        },
+      },
+    }),
     configureServer(server) {
       // Manually find and parse log file after server start since
       // initial compilation does not trigger handleHotUpdate.
