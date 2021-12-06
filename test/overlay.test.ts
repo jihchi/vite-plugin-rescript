@@ -180,6 +180,15 @@ describe('@jihchi/vite-plugin-rescript/overlay', () => {
     });
   });
 
+  it('returns only the first error', () => {
+    expectParseLog(start, error, syntaxError, done).toEqual({
+      message: "The value whoops can't be found",
+      stack: '',
+      id: '/path/to/file.res:3:3-8',
+      frame: errorFrame,
+    });
+  });
+
   it('returns error with multiple messages', () => {
     const hint = '  Did you mean whooops?';
     expectParseLog(start, error, hint, done).toEqual({
