@@ -1,7 +1,6 @@
 import { readFile } from 'fs';
 import { Plugin } from 'vite';
 import execa from 'execa';
-import glob from 'glob';
 import npmRunPath from 'npm-run-path';
 import chalk from 'chalk';
 import parseErrorLog from './overlay';
@@ -76,16 +75,11 @@ export default function createReScriptPlugin(): Plugin {
     configureServer(server) {
       // Manually find and parse log file after server start since
       // initial compilation does not trigger handleHotUpdate.
-      glob('**/lib/bs/.compiler.log', {}, (globError, files) => {
-        if (!globError && files.length > 0) {
-          const [logPath] = files;
-          readFile(logPath, (readFileError, data) => {
-            if (!readFileError && data) {
-              const log = data.toString();
-              const err = parseErrorLog(log);
-              if (err) server.ws.send({ type: 'error', err });
-            }
-          });
+      readFile('./lib/bs/.compiler.log', (readFileError, data) => {
+        if (!readFileError && data) {
+          const log = data.toString();
+          const err = parseErrorLog(log);
+          if (err) server.ws.send({ type: 'error', err });
         }
       });
     },
