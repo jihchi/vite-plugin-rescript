@@ -3,7 +3,7 @@ import { Plugin } from 'vite';
 import execa from 'execa';
 import npmRunPath from 'npm-run-path';
 import chalk from 'chalk';
-import parseErrorLog from './overlay';
+import parseCompilerLog from './parseCompilerLog';
 
 const logPrefix = chalk.cyan('[@jihchi/vite-plugin-rescript]');
 
@@ -70,7 +70,7 @@ export default function createReScriptPlugin(): Plugin {
       readFile('./lib/bs/.compiler.log', (readFileError, data) => {
         if (!readFileError && data) {
           const log = data.toString();
-          const err = parseErrorLog(log);
+          const err = parseCompilerLog(log);
           if (err) server.ws.send({ type: 'error', err });
         }
       });
@@ -78,7 +78,7 @@ export default function createReScriptPlugin(): Plugin {
     async handleHotUpdate({ file, read, server }) {
       if (file.endsWith('.compiler.log')) {
         const log = await read();
-        const err = parseErrorLog(log);
+        const err = parseCompilerLog(log);
         if (err) server.ws.send({ type: 'error', err });
       }
     },

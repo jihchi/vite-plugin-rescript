@@ -1,4 +1,7 @@
+import { ErrorPayload } from 'vite';
 import { EOL } from 'os';
+
+const ruler = '—'.repeat(80);
 
 // https://github.com/rescript-lang/rescript-vscode/blob/7ab2d231f91fee2f93cbf6cae1b38f94c06a58c1/server/src/utils.ts#L288
 const fileAndRangeRegex = /(.+):(\d+):(\d+)(-(\d+)(:(\d+))?)?$/;
@@ -17,7 +20,14 @@ function isErrorLine(line: string) {
   return false;
 }
 
-export default function parseErrorLog(log: string) {
+/**
+ * Parses the .compiler.log, returning the first error or null if no errors were found.
+ * @param log - The log file text.
+ * @returns Error object to send to the client or null.
+ */
+export default function parseCompilerLog(
+  log: string
+): ErrorPayload['err'] | null {
   // Split by line endings and remove empty lines
   const lines = log.split(EOL).filter(Boolean);
 
@@ -32,7 +42,7 @@ export default function parseErrorLog(log: string) {
 
     // Avoid trimming the indentation in vite overlay by adding a horizontal ruler
     // https://github.com/vitejs/vite/blob/96591bf9989529de839ba89958755eafe4c445ae/packages/vite/src/client/overlay.ts#L144
-    const frame = ['—'.repeat(80)];
+    const frame = [ruler];
 
     // Parse the log file line by line. It might seem weird having to resort to log parsing,
     // but this is actually how the official rescript language server works:
