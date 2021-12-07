@@ -102,11 +102,7 @@ const ppxErrorFrame = `
 `.trim(); // Trim newlines while also matching vite overlay trim behavior
 
 function expectParseCompilerLog(...sections: string[]) {
-  return expect(parseCompilerLog(
-    sections
-      .join(EOL)
-      .replace(/\n/g, EOL)
-  ));
+  return expect(parseCompilerLog(sections.join(EOL).replace(/\n/g, EOL)));
 }
 
 describe('@jihchi/vite-plugin-rescript/overlay', () => {
