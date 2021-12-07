@@ -1,7 +1,9 @@
+import { readFile } from 'fs';
 import { Plugin } from 'vite';
 import execa from 'execa';
 import npmRunPath from 'npm-run-path';
 import chalk from 'chalk';
+import parseCompilerLog from './parseCompilerLog';
 
 const logPrefix = chalk.cyan('[@jihchi/vite-plugin-rescript]');
 
@@ -22,6 +24,7 @@ async function launchReScript(watch: boolean) {
 
   function dataListener(chunk: any) {
     const output = chunk.toString().trimEnd();
+    // eslint-disable-next-line no-console
     console.log(logPrefix, output);
     if (watch && output.includes('>>>> Finish compiling')) {
       compileOnce(true);
@@ -39,8 +42,6 @@ async function launchReScript(watch: boolean) {
   } else {
     await result;
   }
-
-  return;
 }
 
 export default function createReScriptPlugin(): Plugin {
@@ -53,6 +54,32 @@ export default function createReScriptPlugin(): Plugin {
 
       if (needReScript) {
         await launchReScript(command === 'serve' || Boolean(build.watch));
+      }
+    },
+    config: () => ({
+      server: {
+        watch: {
+          // Ignore rescript files when watching since they may occasionally trigger hot update
+          ignored: ['**/*.res', '**/*.resi'],
+        },
+      },
+    }),
+    configureServer(server) {
+      // Manually find and parse log file after server start since
+      // initial compilation does not trigger handleHotUpdate.
+      readFile('./lib/bs/.compiler.log', (readFileError, data) => {
+        if (!readFileError && data) {
+          const log = data.toString();
+          const err = parseCompilerLog(log);
+          if (err) server.ws.send({ type: 'error', err });
+        }
+      });
+    },
+    async handleHotUpdate({ file, read, server }) {
+      if (file.endsWith('.compiler.log')) {
+        const log = await read();
+        const err = parseCompilerLog(log);
+        if (err) server.ws.send({ type: 'error', err });
       }
     },
   };
