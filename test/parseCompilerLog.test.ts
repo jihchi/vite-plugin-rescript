@@ -1,4 +1,5 @@
 import { EOL } from 'os';
+import { describe, expect, it } from 'vitest';
 import parseCompilerLog from '../src/parseCompilerLog';
 
 const start = '#Start(1638790229265)';

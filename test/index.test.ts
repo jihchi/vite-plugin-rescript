@@ -1,3 +1,4 @@
+import { describe, expect, it } from 'vitest';
 import Plugin from '../src';
 
 describe('@jihchi/vite-plugin-rescript', () => {
