@@ -57,7 +57,9 @@ export default function createReScriptPlugin(): Plugin {
       const isLocked = existsSync(path.resolve('./.bsb.lock'));
 
       if (needReScript) {
-        await launchReScript(!isLocked && (command === 'serve' || Boolean(build.watch)));
+        await launchReScript(
+          !isLocked && (command === 'serve' || Boolean(build.watch))
+        );
       }
     },
     config: () => ({
@@ -71,13 +73,16 @@ export default function createReScriptPlugin(): Plugin {
     configureServer(server) {
       // Manually find and parse log file after server start since
       // initial compilation does not trigger handleHotUpdate.
-      readFile(path.resolve('./lib/bs/.compiler.log'), (readFileError, data) => {
-        if (!readFileError && data) {
-          const log = data.toString();
-          const err = parseCompilerLog(log);
-          if (err) server.ws.send({ type: 'error', err });
+      readFile(
+        path.resolve('./lib/bs/.compiler.log'),
+        (readFileError, data) => {
+          if (!readFileError && data) {
+            const log = data.toString();
+            const err = parseCompilerLog(log);
+            if (err) server.ws.send({ type: 'error', err });
+          }
         }
-      });
+      );
     },
     async handleHotUpdate({ file, read, server }) {
       if (file.endsWith('.compiler.log')) {
