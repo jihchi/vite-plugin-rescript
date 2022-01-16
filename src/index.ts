@@ -1,4 +1,5 @@
-import { readFile } from 'fs';
+import * as path from 'path';
+import { readFile, existsSync } from 'fs';
 import { Plugin } from 'vite';
 import execa from 'execa';
 import npmRunPath from 'npm-run-path';
@@ -52,8 +53,11 @@ export default function createReScriptPlugin(): Plugin {
       const needReScript =
         (command === 'serve' && mode === 'development') || command === 'build';
 
+      // The watch command can only be run by one process at the same time.
+      const isLocked = existsSync(path.resolve('./.bsb.lock'));
+
       if (needReScript) {
-        await launchReScript(command === 'serve' || Boolean(build.watch));
+        await launchReScript(!isLocked && (command === 'serve' || Boolean(build.watch)));
       }
     },
     config: () => ({
@@ -67,7 +71,7 @@ export default function createReScriptPlugin(): Plugin {
     configureServer(server) {
       // Manually find and parse log file after server start since
       // initial compilation does not trigger handleHotUpdate.
-      readFile('./lib/bs/.compiler.log', (readFileError, data) => {
+      readFile(path.resolve('./lib/bs/.compiler.log'), (readFileError, data) => {
         if (!readFileError && data) {
           const log = data.toString();
           const err = parseCompilerLog(log);
