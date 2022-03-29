@@ -52,7 +52,7 @@ Take for example the following code:
 ```
 
 The bundler will fail when reaching this file, since the imports are resolved relative to the generated JS file (which resides in `lib`),
-but the `.css` and `.js` file are not copied into this directory. By using the loader it no longer fails since the bundler will resolve
+but the `.css` and `.js` files are not copied into this directory. By using the loader it no longer fails since the bundler will resolve
 the files relative to the `.res` file instead.
 
 ### Configuration
