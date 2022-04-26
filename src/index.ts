@@ -46,9 +46,22 @@ async function launchReScript(watch: boolean) {
   }
 }
 
-export default function createReScriptPlugin(): Plugin {
+interface Config {
+  loader?: {
+    output?: string;
+    suffix?: string;
+  };
+}
+
+export default function createReScriptPlugin(config?: Config): Plugin {
   let root: string;
   let usingLoader = false;
+
+  // Retrieve loader config
+  const output = config?.loader?.output ?? './lib/es6';
+  const suffix = config?.loader?.suffix ?? '.bs.js';
+  const suffixRegex = new RegExp(`${suffix.replace('.', '\\.')}$`);
+
   return {
     name: '@jihchi/vite-plugin-rescript',
     enforce: 'pre',
@@ -90,7 +103,7 @@ export default function createReScriptPlugin(): Plugin {
       if (source.endsWith('.res')) usingLoader = true;
       if (options.isEntry || !importer) return null;
       if (!importer.endsWith('.res')) return null;
-      if (!source.endsWith('.bs.js')) return null;
+      if (!source.endsWith(suffix)) return null;
       if (path.isAbsolute(source)) return null;
 
       // This is the directory name of the ReScript file
@@ -105,7 +118,7 @@ export default function createReScriptPlugin(): Plugin {
       }
 
       // Only replace the last occurrence
-      const resFile = source.replace(/\.bs\.js$/, '.res');
+      const resFile = source.replace(suffixRegex, '.res');
       const id = path.join(dirname, resFile);
 
       // Enable other plugins to resolve the file
@@ -130,8 +143,11 @@ export default function createReScriptPlugin(): Plugin {
       // Find the path to the generated js file
       const relativePath = path.relative(root, id);
       const filePath = path
-        .resolve('./lib/es6', relativePath)
-        .replace(/\.res$/, '.bs.js');
+        .resolve(output, relativePath)
+        .replace(/\.res$/, suffix);
+
+      // Add the generated file to the watch module graph
+      this.addWatchFile(filePath);
 
       // Read the file content and return the code
       return { code: await fs.readFile(filePath, 'utf8') };
@@ -140,11 +156,11 @@ export default function createReScriptPlugin(): Plugin {
       // HMR is not automatically triggered when using the ReScript file loader.
       // This waits for the generated `.bs.js` files to be generated, then finds
       // their associated `.res` files and marks them as files to be reloaded.
-      if (usingLoader && file.endsWith('.bs.js')) {
-        const lib = path.resolve('./lib/es6');
+      if (usingLoader && file.endsWith(suffix)) {
+        const lib = path.resolve(output);
         const relativePath = path.relative(lib, file);
         if (relativePath.startsWith('..')) return;
-        const resFile = relativePath.replace(/\.bs\.js$/, '.res');
+        const resFile = relativePath.replace(suffixRegex, '.res');
         const id = path.join(root, resFile);
         const moduleNode = server.moduleGraph.getModuleById(id);
         if (moduleNode) return [moduleNode];
