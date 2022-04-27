@@ -81,7 +81,14 @@ export default function createReScriptPlugin(config?: Config): Plugin {
         );
       }
     },
-    config: () => ({
+    config: userConfig => ({
+      build: {
+        // If the build watcher is enabled (adding watch config would automatically enable it),
+        // exclude rescript files since recompilation should be based on the generated JS files.
+        watch: userConfig.build?.watch
+          ? { exclude: ['**/*.res', '**/*.resi'] }
+          : null,
+      },
       server: {
         watch: {
           // Ignore rescript files when watching since they may occasionally trigger hot update
