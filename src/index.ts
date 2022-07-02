@@ -38,7 +38,7 @@ async function launchReScript(watch: boolean) {
   stderr && stderr.on('data', dataListener);
 
   if (watch) {
-    await new Promise(resolve => {
+    await new Promise((resolve) => {
       compileOnce = resolve;
     });
   } else {
@@ -81,7 +81,7 @@ export default function createReScriptPlugin(config?: Config): Plugin {
         );
       }
     },
-    config: userConfig => ({
+    config: (userConfig) => ({
       build: {
         // If the build watcher is enabled (adding watch config would automatically enable it),
         // exclude rescript files since recompilation should be based on the generated JS files.
@@ -99,11 +99,13 @@ export default function createReScriptPlugin(config?: Config): Plugin {
     configureServer(server) {
       // Manually find and parse log file after server start since
       // initial compilation does not trigger handleHotUpdate.
-      fs.readFile(path.resolve('./lib/bs/.compiler.log'), 'utf8').then(data => {
-        const log = data.toString();
-        const err = parseCompilerLog(log);
-        if (err) server.ws.send({ type: 'error', err });
-      });
+      fs.readFile(path.resolve('./lib/bs/.compiler.log'), 'utf8').then(
+        (data) => {
+          const log = data.toString();
+          const err = parseCompilerLog(log);
+          if (err) server.ws.send({ type: 'error', err });
+        }
+      );
     },
     // Hook that resolves `.bs.js` imports to their `.res` counterpart
     async resolveId(source, importer, options: any) {
