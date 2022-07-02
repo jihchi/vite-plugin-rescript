@@ -5,7 +5,7 @@ import { Plugin } from 'vite';
 import execa from 'execa';
 import npmRunPath from 'npm-run-path';
 import chalk from 'chalk';
-import parseCompilerLog from './parseCompilerLog';
+import parseCompilerLog from './parseCompilerLog.js';
 
 const logPrefix = chalk.cyan('[@jihchi/vite-plugin-rescript]');
 
