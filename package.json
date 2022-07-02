@@ -8,9 +8,15 @@
   },
   "version": "2.1.0",
   "license": "MIT",
-  "main": "dist/index.js",
-  "module": "dist/vite-plugin-rescript.esm.js",
-  "typings": "dist/index.d.ts",
+  "type": "module",
+  "source": "./src/index.ts",
+  "exports": {
+    "require": "./dist/index.cjs",
+    "default": "./dist/index.js"
+  },
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "typings": "./dist/index.d.ts",
   "keywords": [
     "rollup-plugin",
     "vite-plugin",
@@ -19,56 +25,30 @@
     "BuckleScript"
   ],
   "files": [
-    "dist",
-    "src"
+    "dist"
   ],
   "engines": {
-    "node": ">=12",
-    "npm": ">=7"
+    "node": "^14 || ^16 || ^18",
+    "npm": "^7 || ^8"
   },
   "scripts": {
-    "start": "tsdx watch",
-    "build": "tsdx build",
-    "test": "vitest run",
-    "lint": "tsdx lint",
-    "prepare": "tsdx build",
-    "size": "size-limit",
-    "analyze": "size-limit --why"
+    "build": "tsup",
+    "format": "prettier --write src test",
+    "start": "tsup --watch",
+    "test": "vitest run"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "tsdx lint"
-    }
-  },
-  "prettier": {
-    "printWidth": 80,
-    "semi": true,
-    "singleQuote": true,
-    "trailingComma": "es5"
-  },
-  "size-limit": [
-    {
-      "path": "dist/vite-plugin-rescript.cjs.production.min.js",
-      "limit": "10 KB"
-    },
-    {
-      "path": "dist/vite-plugin-rescript.esm.js",
-      "limit": "10 KB"
-    }
-  ],
   "dependencies": {
     "chalk": "^4.1.2",
     "execa": "^5.1.1",
     "npm-run-path": "^4.0.1"
   },
   "devDependencies": {
-    "@size-limit/preset-small-lib": "^5.0.3",
+    "@sindresorhus/tsconfig": "^3.0.1",
     "@types/debug": "^4.1.7",
-    "husky": "^7.0.2",
-    "size-limit": "^5.0.3",
-    "tsdx": "^0.14.1",
-    "tslib": "^2.3.1",
-    "typescript": "^4.4.2",
+    "@types/node": "^18.0.0",
+    "prettier": "2.7.1",
+    "tsup": "^6.1.3",
+    "typescript": "^4.7.4",
     "vite": "^2.5.3",
     "vitest": "^0.1.16"
   },
