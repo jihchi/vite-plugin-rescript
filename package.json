@@ -23,8 +23,8 @@
     "src"
   ],
   "engines": {
-    "node": "^15",
-    "npm": "^7"
+    "node": "^14 || ^16 || ^18",
+    "npm": "^7 || ^8"
   },
   "scripts": {
     "build": "tsup src/index.ts",
