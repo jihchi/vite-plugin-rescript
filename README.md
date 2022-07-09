@@ -117,6 +117,14 @@ export default defineConfig({
 });
 ```
 
+## Contributors
+
+Many thanks for your help!
+
+<a href="https://github.com/jihchi/vite-plugin-rescript/graphs/contributors">
+  <img src="https://contributors-img.web.app/image?repo=jihchi/vite-plugin-rescript" />
+</a>
+
 [workflows-ci-shield]: https://github.com/jihchi/vite-plugin-rescript/actions/workflows/main.yml/badge.svg
 [workflows-ci-url]: https://github.com/jihchi/vite-plugin-rescript/actions/workflows/main.yml
 [npm-package-shield]: https://img.shields.io/npm/v/@jihchi/vite-plugin-rescript
