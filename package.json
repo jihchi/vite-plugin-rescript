@@ -54,6 +54,6 @@
   },
   "peerDependencies": {
     "rescript": "^10.0.0-alpha.1",
-    "vite": "^2.4.4"
+    "vite": "^3"
   }
 }
