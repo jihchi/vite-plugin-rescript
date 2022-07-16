@@ -2,8 +2,8 @@ import * as path from 'path';
 import { existsSync } from 'fs';
 import * as fs from 'fs/promises';
 import { Plugin } from 'vite';
-import execa from 'execa';
-import npmRunPath from 'npm-run-path';
+import { execaCommand } from 'execa';
+import { npmRunPathEnv } from 'npm-run-path';
 import chalk from 'chalk';
 import parseCompilerLog from './parseCompilerLog.js';
 
@@ -14,8 +14,8 @@ async function launchReScript(watch: boolean) {
     ? 'rescript build -with-deps -w'
     : 'rescript build -with-deps';
 
-  const result = execa.command(cmd, {
-    env: npmRunPath.env(),
+  const result = execaCommand(cmd, {
+    env: npmRunPathEnv(),
     extendEnv: true,
     shell: true,
     windowsHide: false,
