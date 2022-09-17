@@ -1,6 +1,6 @@
 import { EOL } from 'os';
 import { describe, expect, it } from 'vitest';
-import parseCompilerLog from '../src/parseCompilerLog';
+import parseCompilerLog from '../src/parseCompilerLog.js';
 
 const start = '#Start(1638790229265)';
 const done = '#Done(1638790229437)';

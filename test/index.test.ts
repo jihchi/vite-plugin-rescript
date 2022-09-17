@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import Plugin from '../src';
+import Plugin from '../src/index.js';
 
 describe('@jihchi/vite-plugin-rescript', () => {
   it('works', () => {
