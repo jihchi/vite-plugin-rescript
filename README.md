@@ -16,16 +16,16 @@ Integrate ReScript with Vite by:
 
 > If you are looking for a template to quickly start a project using Vite, ReScript and React, take a look at [vitejs-template-react-rescript](https://github.com/jihchi/vitejs-template-react-rescript), the template depends on this plugin.
 
-### npm
 
 ```sh
+# npm
 npm i -D @jihchi/vite-plugin-rescript
-```
 
-### yarn
-
-```sh
+# yarn
 yarn add -D @jihchi/vite-plugin-rescript
+
+# pnpm
+pnpm i -D @jihchi/vite-plugin-rescript
 ```
 
 Configure your vite plugin in `vite.config.ts`:
@@ -37,6 +37,12 @@ import createReScriptPlugin from '@jihchi/vite-plugin-rescript';
 export default defineConfig({
   plugins: [createReScriptPlugin()],
 });
+```
+
+If you're using `require` syntax:
+
+```js
+const { default: createReScriptPlugin } = require('@jihchi/vite-plugin-rescript');
 ```
 
 ## Using Loader
