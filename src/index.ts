@@ -68,9 +68,15 @@ export default function createReScriptPlugin(config?: Config): Plugin {
     async configResolved(resolvedConfig) {
       root = resolvedConfig.root;
 
-      const { build, command, mode } = resolvedConfig;
-      const needReScript =
-        (command === 'serve' && mode === 'development') || command === 'build';
+      const { build, command, inlineConfig } = resolvedConfig;
+
+      // exclude "vite preview [--mode <mode>]"
+      const isOnlyDevServerLaunching =
+        command === 'serve' && !inlineConfig.hasOwnProperty('preview');
+
+      const isBuildForProduction = command === 'build';
+
+      const needReScript = isOnlyDevServerLaunching || isBuildForProduction;
 
       // The watch command can only be run by one process at the same time.
       const isLocked = existsSync(path.resolve('./.bsb.lock'));
