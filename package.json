@@ -46,14 +46,14 @@
   },
   "devDependencies": {
     "@sindresorhus/tsconfig": "^3.0.1",
-    "prettier": "2.7.1",
+    "prettier": "2.8.1",
     "rimraf": "^3.0.2",
-    "tsup": "^6.2.3",
-    "vite": "^3.0.9",
-    "vitest": "^0.23.0"
+    "tsup": "^6.5.0",
+    "vite": "^4.0.0",
+    "vitest": "^0.25.7"
   },
   "peerDependencies": {
     "rescript": "^9 || ^10",
-    "vite": "^3"
+    "vite": "^3 || ^4"
   }
 }
