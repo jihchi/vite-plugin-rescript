@@ -29,16 +29,19 @@
   "files": [
     "dist"
   ],
+  "packageManagers": {
+    "pnpm": "7.26.1"
+  },
   "engines": {
     "node": "^14 || ^16 || ^18",
-    "npm": "^7 || ^8"
+    "pnpm": "^7.26.1"
   },
   "scripts": {
     "clean": "rimraf dist",
-    "prebuild": "npm run clean",
+    "prebuild": "pnpm clean",
     "build": "tsup",
     "format": "prettier --write src test",
-    "start": "npm run build -- --watch",
+    "start": "pnpm build -- --watch",
     "test": "vitest run"
   },
   "dependencies": {
