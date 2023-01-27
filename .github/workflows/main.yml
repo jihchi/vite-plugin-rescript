@@ -27,10 +27,6 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
-      - name: Install typescript (optional)
-        if: ${{ matrix.node == '14.x' }}
-        run: pnpm install --no-lockfile typescript
-
       - name: Test
         run: pnpm test -- --coverage
 
