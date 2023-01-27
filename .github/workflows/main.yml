@@ -28,7 +28,7 @@ jobs:
         run: pnpm install
 
       - name: Test
-        run: pnpm test -- --ci --coverage --maxWorkers=2
+        run: pnpm test -- --coverage
 
       - name: Build
         run: pnpm build

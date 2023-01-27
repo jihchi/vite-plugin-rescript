@@ -51,6 +51,7 @@
   },
   "devDependencies": {
     "@sindresorhus/tsconfig": "^3.0.1",
+    "@vitest/coverage-c8": "^0.28.3",
     "prettier": "2.8.1",
     "rimraf": "^3.0.2",
     "tsup": "^6.5.0",
