@@ -14,16 +14,21 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v3
 
+      - uses: pnpm/action-setup@v2
+        with:
+          version: 7.26.1
+
       - name: Use Node ${{ matrix.node }}
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node }}
+          cache: 'pnpm'
 
-      - name: Install
-        run: npm install
+      - name: Install dependencies
+        run: pnpm install
 
       - name: Test
-        run: npm test --ci --coverage --maxWorkers=2
+        run: pnpm test -- --ci --coverage --maxWorkers=2
 
       - name: Build
-        run: npm run build
+        run: pnpm build
