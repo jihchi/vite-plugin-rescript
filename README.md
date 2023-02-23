@@ -128,8 +128,10 @@ export default defineConfig({
 Many thanks for your help!
 
 <a href="https://github.com/jihchi/vite-plugin-rescript/graphs/contributors">
-  <img src="https://contributors-img.web.app/image?repo=jihchi/vite-plugin-rescript" />
+  <img src="https://contrib.rocks/image?repo=jihchi/vite-plugin-rescript" />
 </a>
+
+The image of contributors is made with [contrib.rocks](https://contrib.rocks).
 
 [workflows-ci-shield]: https://github.com/jihchi/vite-plugin-rescript/actions/workflows/main.yml/badge.svg
 [workflows-ci-url]: https://github.com/jihchi/vite-plugin-rescript/actions/workflows/main.yml
