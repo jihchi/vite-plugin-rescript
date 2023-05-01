@@ -30,11 +30,10 @@
     "dist"
   ],
   "packageManagers": {
-    "pnpm": "7.26.1"
+    "pnpm": "8.3.1"
   },
   "engines": {
-    "node": "^14 || >=16.0.0",
-    "pnpm": "^7.26.1"
+    "node": "^14 || >=16.0.0"
   },
   "scripts": {
     "clean": "rimraf dist",
