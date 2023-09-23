@@ -5,9 +5,10 @@ jobs:
     name: Build, lint, and test on Node ${{ matrix.node }} and ${{ matrix.os }}
 
     runs-on: ${{ matrix.os }}
+
     strategy:
       matrix:
-        node: ['14.x', '16.x', '18.x']
+        node: ['16.x', '18.x', '20.x']
         os: [ubuntu-latest, windows-latest, macOS-latest]
 
     steps:
@@ -15,8 +16,6 @@ jobs:
         uses: actions/checkout@v3
 
       - uses: pnpm/action-setup@v2
-        with:
-          version: 7.26.1
 
       - name: Use Node ${{ matrix.node }}
         uses: actions/setup-node@v3

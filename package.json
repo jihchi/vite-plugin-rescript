@@ -1,24 +1,6 @@
 {
   "name": "@jihchi/vite-plugin-rescript",
-  "author": "jihchi",
-  "homepage": "https://github.com/jihchi/vite-plugin-rescript",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/jihchi/vite-plugin-rescript.git"
-  },
   "version": "5.3.0",
-  "license": "MIT",
-  "type": "module",
-  "types": "./dist/index.d.ts",
-  "main": "./dist/index.cjs",
-  "module": "./dist/index.js",
-  "exports": {
-    ".": {
-      "types": "./dist/index.d.ts",
-      "require": "./dist/index.cjs",
-      "import": "./dist/index.js"
-    }
-  },
   "keywords": [
     "rollup-plugin",
     "vite-plugin",
@@ -26,20 +8,32 @@
     "ReasonML",
     "BuckleScript"
   ],
+  "homepage": "https://github.com/jihchi/vite-plugin-rescript",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jihchi/vite-plugin-rescript.git"
+  },
+  "license": "MIT",
+  "author": "jihchi",
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "require": "./dist/index.cjs",
+      "import": "./dist/index.js"
+    }
+  },
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "files": [
     "dist"
   ],
-  "packageManagers": {
-    "pnpm": "8.3.1"
-  },
-  "engines": {
-    "node": "^14 || >=16.0.0"
-  },
   "scripts": {
-    "clean": "rimraf dist",
     "prebuild": "pnpm clean",
     "build": "tsup",
-    "format": "prettier --write src test",
+    "clean": "rimraf dist",
+    "format": "prettier --write src test && pnpm dlx sort-package-json",
     "start": "pnpm build -- --watch",
     "test": "vitest run"
   },
@@ -50,16 +44,20 @@
   },
   "devDependencies": {
     "@sindresorhus/tsconfig": "^3.0.1",
-    "@vitest/coverage-c8": "^0.31.0",
-    "prettier": "2.8.8",
+    "@vitest/coverage-v8": "^0.34.5",
+    "prettier": "3.0.3",
     "rimraf": "^3.0.2",
     "tsup": "^6.7.0",
-    "typescript": "^5.0.4",
-    "vite": "^4.3.5",
-    "vitest": "^0.31.0"
+    "typescript": "^5.2.2",
+    "vite": "^4.4.9",
+    "vitest": "^0.34.5"
   },
   "peerDependencies": {
     "rescript": "^9 || ^10 || >=11.0.0-alpha",
     "vite": "^3 || ^4"
+  },
+  "packageManager": "pnpm@8.7.6",
+  "engines": {
+    "node": "^16 || ^18 || ^20"
   }
 }
