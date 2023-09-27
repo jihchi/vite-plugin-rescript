@@ -1,6 +1,6 @@
 {
   "name": "@jihchi/vite-plugin-rescript",
-  "version": "5.3.0",
+  "version": "5.3.1",
   "keywords": [
     "rollup-plugin",
     "vite-plugin",
