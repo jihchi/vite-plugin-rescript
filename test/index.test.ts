@@ -8,4 +8,10 @@ describe('@jihchi/vite-plugin-rescript', () => {
     expect(actual).toHaveProperty('configResolved');
     expect(actual.configResolved).toBeInstanceOf(Function);
   });
+
+  it('invokes closeBundle hook without crashing', async () => {
+    const actual = Plugin();
+    expect(actual).toHaveProperty('closeBundle');
+    await expect(actual.closeBundle()).resolves.toEqual(undefined);
+  });
 });
