@@ -9,7 +9,11 @@ import parseCompilerLog from './parseCompilerLog.js';
 
 const logPrefix = chalk.cyan('[@jihchi/vite-plugin-rescript]');
 
-async function launchReScript(watch: boolean) {
+type ReScriptProcess = {
+  shutdown: () => void;
+};
+
+async function launchReScript(watch: boolean): Promise<ReScriptProcess> {
   const cmd = watch
     ? 'rescript build -with-deps -w'
     : 'rescript build -with-deps';
@@ -44,6 +48,14 @@ async function launchReScript(watch: boolean) {
   } else {
     await result;
   }
+
+  return {
+    shutdown() {
+      if (!result.killed) {
+        result.kill();
+      }
+    },
+  };
 }
 
 interface Config {
@@ -56,6 +68,7 @@ interface Config {
 export default function createReScriptPlugin(config?: Config): Plugin {
   let root: string;
   let usingLoader = false;
+  let childProcessReScript: undefined | ReScriptProcess;
 
   // Retrieve loader config
   const output = config?.loader?.output ?? './lib/es6';
@@ -82,7 +95,7 @@ export default function createReScriptPlugin(config?: Config): Plugin {
       const isLocked = existsSync(path.resolve('./.bsb.lock'));
 
       if (needReScript) {
-        await launchReScript(
+        childProcessReScript = await launchReScript(
           !isLocked && (command === 'serve' || Boolean(build.watch))
         );
       }
@@ -185,6 +198,10 @@ export default function createReScriptPlugin(config?: Config): Plugin {
         if (err) server.ws.send({ type: 'error', err });
       }
 
+      return;
+    },
+    async closeBundle() {
+      childProcessReScript?.shutdown();
       return;
     },
   };
