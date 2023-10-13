@@ -50,7 +50,7 @@
     "tsup": "^6.7.0",
     "typescript": "^5.2.2",
     "vite": "^4.4.9",
-    "vitest": "^0.34.5"
+    "vitest": "^0.34.6"
   },
   "peerDependencies": {
     "rescript": "^9 || ^10 || >=11.0.0-alpha",
