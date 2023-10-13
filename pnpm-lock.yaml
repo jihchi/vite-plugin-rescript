@@ -20,8 +20,8 @@ dependencies:
 
 devDependencies:
   '@sindresorhus/tsconfig':
-    specifier: ^3.0.1
-    version: 3.0.1
+    specifier: ^5.0.0
+    version: 5.0.0
   '@vitest/coverage-v8':
     specifier: ^0.34.5
     version: 0.34.5(vitest@0.34.5)
@@ -525,9 +525,9 @@ packages:
     resolution: {integrity: sha512-+Fj43pSMwJs4KRrH/938Uf+uAELIgVBmQzg/q1YG10djyfA3TnrU8N8XzqCh/okZdszqBQTZf96idMfE5lnwTA==}
     dev: true
 
-  /@sindresorhus/tsconfig@3.0.1:
-    resolution: {integrity: sha512-0/gtPNTY3++0J2BZM5nHHULg0BIMw886gqdn8vWN+Av6bgF5ZU2qIcHubAn+Z9KNvJhO8WFE+9kDOU3n6OcKtA==}
-    engines: {node: '>=14'}
+  /@sindresorhus/tsconfig@5.0.0:
+    resolution: {integrity: sha512-LvvySslVPhAwo7dT+iovKXKCmJD82yYAsH/3D5BSyT3YP9Dvhdlhy0eQr0DBE0CxeFO6Wdbco3+nB+c2QYcAaA==}
+    engines: {node: '>=18'}
     dev: true
 
   /@types/chai-subset@1.3.3:
