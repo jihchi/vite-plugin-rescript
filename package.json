@@ -53,10 +53,10 @@
     "vitest": "^0.34.6"
   },
   "peerDependencies": {
-    "rescript": "^9 || ^10 || >=11.0.0-alpha",
-    "vite": "^3 || ^4"
+    "rescript": ">=9",
+    "vite": ">=3"
   },
-  "packageManager": "pnpm@8.7.6",
+  "packageManager": "pnpm@8.11.0",
   "engines": {
     "node": ">=16.0"
   }

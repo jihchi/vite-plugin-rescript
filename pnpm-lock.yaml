@@ -15,7 +15,7 @@ dependencies:
     specifier: ^4.0.1
     version: 4.0.1
   rescript:
-    specifier: ^9 || ^10 || >=11.0.0-alpha
+    specifier: '>=9'
     version: 9.1.0
 
 devDependencies:
