@@ -33,7 +33,7 @@
     "prebuild": "pnpm clean",
     "build": "tsup",
     "clean": "rimraf dist",
-    "format": "prettier --write src test && pnpm dlx sort-package-json",
+    "format": "prettier --write . && pnpm dlx sort-package-json",
     "start": "pnpm build -- --watch",
     "test": "vitest run"
   },
