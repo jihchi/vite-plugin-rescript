@@ -13,10 +13,10 @@ const codeRegex = /^  +([0-9]+| +|\.) (│|┆)/;
 const warningErrorRegex = /Warning number \d+ \(configured as error\)/;
 
 // Returns true if the line indicates the start of an error block
-function isErrorLine(line: string) {
-  if (line.startsWith("  We've found a bug for you!")) return true;
-  if (line.startsWith('  Syntax error!')) return true;
-  if (warningErrorRegex.test(line)) return true;
+function isErrorLine(line: string | undefined) {
+  if (line?.startsWith("  We've found a bug for you!")) return true;
+  if (line?.startsWith('  Syntax error!')) return true;
+  if (line && warningErrorRegex.test(line)) return true;
   return false;
 }
 
@@ -34,7 +34,7 @@ export default function parseCompilerLog(
   // Optimization; only parse log when compiler is done
   if (lines[lines.length - 1]?.startsWith('#Done(')) {
     let foundError = false;
-    let path = '';
+    let path: string | undefined;
     let startLine = 0;
 
     // There can be additional messages such as hints
@@ -58,39 +58,41 @@ export default function parseCompilerLog(
 
         // Optimization; the next line is always the file + range, which means it
         // can be parsed now and the next iteration (line) can be skipped.
-        path = lines[i + 1].trim();
+        path = lines?.[i + 1]?.trim();
 
         // Extract the start line
-        const match = path.match(fileAndRangeRegex);
-        if (match) startLine = parseInt(match[2], 10);
+        const match = path?.match(fileAndRangeRegex);
+        if (match) startLine = Number(match[2]);
 
         // Skip the next line since it was handled here
         i += 1;
       } else if (!foundError) {
         // Only run below checks once an error has been found
-      } else if (line.startsWith('  Warning number ')) {
+      } else if (line?.startsWith('  Warning number ')) {
         // Reached the end of the error
         break;
-      } else if (line.startsWith('#Done(')) {
+      } else if (line?.startsWith('#Done(')) {
         // Reached the end of the log file
         break;
       } else {
         // This can now only be code lines or messages
-        const match = line.match(codeRegex);
+        const match = line?.match(codeRegex);
         if (match) {
           // Replace strange vertical bars with regular ones in order to match
           // the code frame regex defined in the vite overlay file:
           // https://github.com/vitejs/vite/blob/96591bf9989529de839ba89958755eafe4c445ae/packages/vite/src/client/overlay.ts#L116
-          let codeFrameLine = line.replace('┆', '|').replace('│', '|');
+          let codeFrameLine = line?.replace('┆', '|').replace('│', '|');
 
           // Since the red color indicator is lost when parsing the log file,
           // this adds a pointer (`>`) to the line where the error starts.
-          if (parseInt(match[1], 10) === startLine) {
-            codeFrameLine = `> ${codeFrameLine.substring(2)}`;
+          if (Number(match[1]) === startLine) {
+            codeFrameLine = `> ${codeFrameLine?.substring(2)}`;
           }
 
-          frame.push(codeFrameLine);
-        } else if (line.startsWith('  ')) {
+          if (codeFrameLine) {
+            frame.push(codeFrameLine);
+          }
+        } else if (line?.startsWith('  ')) {
           // It has to be a message by now
           messages.push(line.trim());
         }

@@ -4,6 +4,7 @@ import * as fs from 'fs/promises';
 import { Plugin } from 'vite';
 import { execaCommand } from 'execa';
 import { npmRunPathEnv } from 'npm-run-path';
+import * as stream from 'stream';
 import chalk from 'chalk';
 import parseCompilerLog from './parseCompilerLog.js';
 
@@ -31,7 +32,7 @@ async function launchReScript(
 
   let compileOnce = (_value: unknown) => {};
 
-  function dataListener(chunk: any) {
+  function dataListener(chunk: stream.Readable) {
     const output = chunk.toString().trimEnd();
     if (!silent) {
       // eslint-disable-next-line no-console
@@ -134,7 +135,7 @@ export default function createReScriptPlugin(config?: Config): Plugin {
       );
     },
     // Hook that resolves `.bs.js` imports to their `.res` counterpart
-    async resolveId(source, importer, options: any) {
+    async resolveId(source, importer, options) {
       if (source.endsWith('.res')) usingLoader = true;
       if (options.isEntry || !importer) return null;
       if (!importer.endsWith('.res')) return null;

@@ -12,6 +12,9 @@ describe('@jihchi/vite-plugin-rescript', () => {
   it('invokes closeBundle hook without crashing', async () => {
     const actual = Plugin();
     expect(actual).toHaveProperty('closeBundle');
-    await expect(actual.closeBundle()).resolves.toEqual(undefined);
+    await expect(
+      // @ts-expect-error
+      actual.closeBundle()
+    ).resolves.toEqual(undefined);
   });
 });
