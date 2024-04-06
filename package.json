@@ -32,13 +32,15 @@
   "scripts": {
     "prebuild": "pnpm clean",
     "build": "tsup",
+    "ci": "biome ci .",
     "clean": "rimraf dist",
-    "format": "sort-package-json && prettier --write .",
+    "format": "sort-package-json && biome format --write .",
+    "lint": "biome lint .",
     "prepack": "pnpm build",
     "release": "np",
     "start": "pnpm build -- --watch",
     "test": "vitest run",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc"
   },
   "dependencies": {
     "chalk": "^5.3.0",
@@ -46,11 +48,11 @@
     "npm-run-path": "^5.3.0"
   },
   "devDependencies": {
+    "@biomejs/biome": "^1.7.1",
     "@sindresorhus/tsconfig": "^5.0.0",
     "@types/node": "^20.12.7",
     "@vitest/coverage-v8": "^1.5.0",
     "np": "*",
-    "prettier": "3.2.5",
     "rimraf": "^5.0.5",
     "sort-package-json": "^2.10.0",
     "tsup": "^8.0.2",
@@ -62,8 +64,8 @@
     "rescript": ">=9",
     "vite": ">=5.1.0"
   },
-  "packageManager": "pnpm@8.11.0",
+  "packageManager": "pnpm@9.0.5+sha512.a722575c18fd791f9ef71e387c6e16cc03c90d859b9b0998d0428ca0e3220828b32a96e6de73cea34edbc0f50824771b1a69c7ea36b86daa3b89c7e6d9a3d912",
   "engines": {
-    "node": ">=16.0"
+    "node": ">=18.0"
   }
 }
