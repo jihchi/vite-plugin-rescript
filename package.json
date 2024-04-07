@@ -34,6 +34,7 @@
     "build": "tsup",
     "clean": "rimraf dist",
     "format": "sort-package-json && prettier --write .",
+    "prepare": "pnpm build",
     "release": "np",
     "start": "pnpm build -- --watch",
     "test": "vitest run"
