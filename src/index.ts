@@ -129,7 +129,7 @@ export default function createReScriptPlugin(config?: Config): Plugin {
         (data) => {
           const log = data.toString();
           const err = parseCompilerLog(log);
-          if (err) server.ws.send({ type: 'error', err });
+          if (err) server.hot.send({ type: 'error', err });
         }
       );
     },
@@ -202,7 +202,7 @@ export default function createReScriptPlugin(config?: Config): Plugin {
       } else if (file.endsWith('.compiler.log')) {
         const log = await read();
         const err = parseCompilerLog(log);
-        if (err) server.ws.send({ type: 'error', err });
+        if (err) server.hot.send({ type: 'error', err });
       }
 
       return;
