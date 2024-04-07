@@ -75,6 +75,7 @@ export default defineConfig({
         output: './lib/js',
         suffix: '.mjs',
       },
+      silent: false,
     }),
   ],
 });

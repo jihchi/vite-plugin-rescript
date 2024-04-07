@@ -13,7 +13,10 @@ type ReScriptProcess = {
   shutdown: () => void;
 };
 
-async function launchReScript(watch: boolean): Promise<ReScriptProcess> {
+async function launchReScript(
+  watch: boolean,
+  silent: boolean
+): Promise<ReScriptProcess> {
   const cmd = watch
     ? 'rescript build -with-deps -w'
     : 'rescript build -with-deps';
@@ -30,8 +33,10 @@ async function launchReScript(watch: boolean): Promise<ReScriptProcess> {
 
   function dataListener(chunk: any) {
     const output = chunk.toString().trimEnd();
-    // eslint-disable-next-line no-console
-    console.log(logPrefix, output);
+    if (!silent) {
+      // eslint-disable-next-line no-console
+      console.log(logPrefix, output);
+    }
     if (watch && output.includes('>>>> Finish compiling')) {
       compileOnce(true);
     }
@@ -63,6 +68,7 @@ interface Config {
     output?: string;
     suffix?: string;
   };
+  silent?: boolean;
 }
 
 export default function createReScriptPlugin(config?: Config): Plugin {
@@ -70,10 +76,11 @@ export default function createReScriptPlugin(config?: Config): Plugin {
   let usingLoader = false;
   let childProcessReScript: undefined | ReScriptProcess;
 
-  // Retrieve loader config
+  // Retrieve config
   const output = config?.loader?.output ?? './lib/es6';
   const suffix = config?.loader?.suffix ?? '.bs.js';
   const suffixRegex = new RegExp(`${suffix.replace('.', '\\.')}$`);
+  const silent = config?.silent ?? false;
 
   return {
     name: '@jihchi/vite-plugin-rescript',
@@ -94,10 +101,10 @@ export default function createReScriptPlugin(config?: Config): Plugin {
       // The watch command can only be run by one process at the same time.
       const isLocked = existsSync(path.resolve('./.bsb.lock'));
 
+      const watch = !isLocked && (command === 'serve' || Boolean(build.watch));
+
       if (needReScript) {
-        childProcessReScript = await launchReScript(
-          !isLocked && (command === 'serve' || Boolean(build.watch))
-        );
+        childProcessReScript = await launchReScript(watch, silent);
       }
     },
     config: (userConfig) => ({
