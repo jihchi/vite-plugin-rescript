@@ -34,6 +34,7 @@
     "build": "tsup",
     "clean": "rimraf dist",
     "format": "sort-package-json && prettier --write .",
+    "release": "np",
     "start": "pnpm build -- --watch",
     "test": "vitest run"
   },
@@ -46,6 +47,7 @@
     "@sindresorhus/tsconfig": "^5.0.0",
     "@types/node": "^20.12.5",
     "@vitest/coverage-v8": "^1.4.0",
+    "np": "*",
     "prettier": "3.2.5",
     "rimraf": "^5.0.5",
     "sort-package-json": "^2.10.0",
