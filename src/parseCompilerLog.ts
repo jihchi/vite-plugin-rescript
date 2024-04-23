@@ -1,13 +1,13 @@
-import { ErrorPayload } from 'vite';
-import { EOL } from 'os';
+import { EOL } from "node:os";
+import type { ErrorPayload } from "vite";
 
-const ruler = '—'.repeat(80);
+const ruler = "—".repeat(80);
 
 // https://github.com/rescript-lang/rescript-vscode/blob/7ab2d231f91fee2f93cbf6cae1b38f94c06a58c1/server/src/utils.ts#L288
 const fileAndRangeRegex = /(.+):(\d+):(\d+)(-(\d+)(:(\d+))?)?$/;
 
 // https://github.com/rescript-lang/rescript-vscode/blob/7ab2d231f91fee2f93cbf6cae1b38f94c06a58c1/server/src/utils.ts#L433
-const codeRegex = /^  +([0-9]+| +|\.) (│|┆)/;
+const codeRegex = /^ {2,}([0-9]+| +|\.) (│|┆)/;
 
 // Compiler can treat warnings as hard errors based on `warnings` object in bsconfig.json
 const warningErrorRegex = /Warning number \d+ \(configured as error\)/;
@@ -15,7 +15,7 @@ const warningErrorRegex = /Warning number \d+ \(configured as error\)/;
 // Returns true if the line indicates the start of an error block
 function isErrorLine(line: string | undefined) {
   if (line?.startsWith("  We've found a bug for you!")) return true;
-  if (line?.startsWith('  Syntax error!')) return true;
+  if (line?.startsWith("  Syntax error!")) return true;
   if (line && warningErrorRegex.test(line)) return true;
   return false;
 }
@@ -26,13 +26,13 @@ function isErrorLine(line: string | undefined) {
  * @returns Error object to send to the client or null.
  */
 export default function parseCompilerLog(
-  log: string
-): ErrorPayload['err'] | null {
+  log: string,
+): ErrorPayload["err"] | null {
   // Split by line endings and remove empty lines
   const lines = log.split(EOL).filter(Boolean);
 
   // Optimization; only parse log when compiler is done
-  if (lines[lines.length - 1]?.startsWith('#Done(')) {
+  if (lines[lines.length - 1]?.startsWith("#Done(")) {
     let foundError = false;
     let path: string | undefined;
     let startLine = 0;
@@ -68,10 +68,10 @@ export default function parseCompilerLog(
         i += 1;
       } else if (!foundError) {
         // Only run below checks once an error has been found
-      } else if (line?.startsWith('  Warning number ')) {
+      } else if (line?.startsWith("  Warning number ")) {
         // Reached the end of the error
         break;
-      } else if (line?.startsWith('#Done(')) {
+      } else if (line?.startsWith("#Done(")) {
         // Reached the end of the log file
         break;
       } else {
@@ -81,7 +81,7 @@ export default function parseCompilerLog(
           // Replace strange vertical bars with regular ones in order to match
           // the code frame regex defined in the vite overlay file:
           // https://github.com/vitejs/vite/blob/96591bf9989529de839ba89958755eafe4c445ae/packages/vite/src/client/overlay.ts#L116
-          let codeFrameLine = line?.replace('┆', '|').replace('│', '|');
+          let codeFrameLine = line?.replace("┆", "|").replace("│", "|");
 
           // Since the red color indicator is lost when parsing the log file,
           // this adds a pointer (`>`) to the line where the error starts.
@@ -92,7 +92,7 @@ export default function parseCompilerLog(
           if (codeFrameLine) {
             frame.push(codeFrameLine);
           }
-        } else if (line?.startsWith('  ')) {
+        } else if (line?.startsWith("  ")) {
           // It has to be a message by now
           messages.push(line.trim());
         }
@@ -101,9 +101,9 @@ export default function parseCompilerLog(
 
     if (foundError) {
       return {
-        message: messages.join('\n'),
-        frame: `${frame.join('\n')}`,
-        stack: '',
+        message: messages.join("\n"),
+        frame: `${frame.join("\n")}`,
+        stack: "",
         id: path,
       };
     }
