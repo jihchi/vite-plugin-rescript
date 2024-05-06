@@ -47,7 +47,7 @@
   },
   "devDependencies": {
     "@sindresorhus/tsconfig": "^5.0.0",
-    "@types/node": "^20.12.7",
+    "@types/node": "^20.12.9",
     "@vitest/coverage-v8": "^1.5.2",
     "np": "*",
     "prettier": "3.2.5",
