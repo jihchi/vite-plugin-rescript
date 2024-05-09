@@ -48,7 +48,7 @@
   "devDependencies": {
     "@sindresorhus/tsconfig": "^5.0.0",
     "@types/node": "^20.12.9",
-    "@vitest/coverage-v8": "^1.5.2",
+    "@vitest/coverage-v8": "^1.6.0",
     "np": "*",
     "prettier": "3.2.5",
     "rimraf": "^5.0.5",
@@ -56,7 +56,7 @@
     "tsup": "^8.0.2",
     "typescript": "^5.4.5",
     "vite": "^5.2.11",
-    "vitest": "^1.5.2"
+    "vitest": "^1.6.0"
   },
   "peerDependencies": {
     "rescript": ">=9",
