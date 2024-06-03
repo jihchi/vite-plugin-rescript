@@ -53,7 +53,7 @@
     "prettier": "3.2.5",
     "rimraf": "^5.0.7",
     "sort-package-json": "^2.10.0",
-    "tsup": "^8.0.2",
+    "tsup": "^8.1.0",
     "typescript": "^5.4.5",
     "vite": "^5.2.11",
     "vitest": "^1.6.0"
