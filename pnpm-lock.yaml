@@ -30,7 +30,7 @@ devDependencies:
     version: 1.6.0(vitest@1.6.0)
   np:
     specifier: '*'
-    version: 10.0.5(typescript@5.4.5)
+    version: 10.0.6(typescript@5.4.5)
   prettier:
     specifier: 3.3.2
     version: 3.3.2
@@ -2454,8 +2454,8 @@ packages:
     engines: {node: '>=14.16'}
     dev: true
 
-  /np@10.0.5(typescript@5.4.5):
-    resolution: {integrity: sha512-Tu270vVvsh92uh6XDXrGS6D94PhzxQYqM8uUxftYVp0B8qXl78dJRYwQ9wfYMOBB9ynlF79eWlUtPUxPzKGddQ==}
+  /np@10.0.6(typescript@5.4.5):
+    resolution: {integrity: sha512-173uUvFDmHtme1ra3JDMjYzqa94XHJAHoNae6lCA4mJWMIz073x9FE2O8SHMMjKXlHetRdOXufLUjdimRxXR3A==}
     engines: {git: '>=2.11.0', node: '>=18', npm: '>=9', pnpm: '>=8', yarn: '>=1.7.0'}
     hasBin: true
     dependencies:
@@ -2971,6 +2971,7 @@ packages:
 
   /rimraf@3.0.2:
     resolution: {integrity: sha512-JZkJMZkAGFFPP2YqXZXPbMlMBgsxzE8ILs4lMIX/2o0L9UBw9O/Y3o6wFw/i9YLapcUJWwqbi3kdxIPdC62TIA==}
+    deprecated: Rimraf versions prior to v4 are no longer supported
     hasBin: true
     dependencies:
       glob: 7.2.3
