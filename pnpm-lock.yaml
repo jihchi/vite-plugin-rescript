@@ -20,8 +20,8 @@ dependencies:
 
 devDependencies:
   '@sindresorhus/tsconfig':
-    specifier: ^5.0.0
-    version: 5.0.0
+    specifier: ^6.0.0
+    version: 6.0.0
   '@types/node':
     specifier: ^20.14.9
     version: 20.14.9
@@ -576,8 +576,8 @@ packages:
     engines: {node: '>=14.16'}
     dev: true
 
-  /@sindresorhus/tsconfig@5.0.0:
-    resolution: {integrity: sha512-LvvySslVPhAwo7dT+iovKXKCmJD82yYAsH/3D5BSyT3YP9Dvhdlhy0eQr0DBE0CxeFO6Wdbco3+nB+c2QYcAaA==}
+  /@sindresorhus/tsconfig@6.0.0:
+    resolution: {integrity: sha512-+fUdfuDd/7O2OZ9/UvJy76IEWn2Tpvm2l+rwUoS2Yz4jCUTSNOQQv2PLWrwekt8cPLwHmpHaBpay34bkBmVl2Q==}
     engines: {node: '>=18'}
     dev: true
 
