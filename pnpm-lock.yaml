@@ -23,8 +23,8 @@ devDependencies:
     specifier: ^6.0.0
     version: 6.0.0
   '@types/node':
-    specifier: ^20.14.11
-    version: 20.14.11
+    specifier: ^22.0.0
+    version: 22.0.0
   '@vitest/coverage-v8':
     specifier: ^2.0.4
     version: 2.0.4(vitest@2.0.4)
@@ -48,10 +48,10 @@ devDependencies:
     version: 5.5.3
   vite:
     specifier: ^5.3.5
-    version: 5.3.5(@types/node@20.14.11)
+    version: 5.3.5(@types/node@22.0.0)
   vitest:
     specifier: ^2.0.4
-    version: 2.0.4(@types/node@20.14.11)
+    version: 2.0.4(@types/node@22.0.0)
 
 packages:
 
@@ -585,10 +585,10 @@ packages:
     resolution: {integrity: sha512-1m0bIFVc7eJWyve9S0RnuRgcQqF/Xd5QsUZAZeQFr1Q3/p9JWoQQEqmVy+DPTNpGXwhgIetAoYF8JSc33q29QA==}
     dev: true
 
-  /@types/node@20.14.11:
-    resolution: {integrity: sha512-kprQpL8MMeszbz6ojB5/tU8PLN4kesnN8Gjzw349rDlNgsSzg90lAVj3llK99Dh7JON+t9AuscPPFW6mPbTnSA==}
+  /@types/node@22.0.0:
+    resolution: {integrity: sha512-VT7KSYudcPOzP5Q0wfbowyNLaVR8QWUdw+088uFWwfvpY6uCWaXpqV6ieLAu9WBcnTa7H4Z5RLK8I5t2FuOcqw==}
     dependencies:
-      undici-types: 5.26.5
+      undici-types: 6.11.1
     dev: true
 
   /@types/normalize-package-data@2.4.4:
@@ -612,7 +612,7 @@ packages:
       std-env: 3.7.0
       test-exclude: 7.0.1
       tinyrainbow: 1.2.0
-      vitest: 2.0.4(@types/node@20.14.11)
+      vitest: 2.0.4(@types/node@22.0.0)
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -3489,8 +3489,8 @@ packages:
     hasBin: true
     dev: true
 
-  /undici-types@5.26.5:
-    resolution: {integrity: sha512-JlCMO+ehdEIKqlFxk6IfVoAUVmgz7cU7zD/h9XZ0qzeosSHmUJVOzSQvvYSYWXkFXC+IfLKSIffhv0sVZup6pA==}
+  /undici-types@6.11.1:
+    resolution: {integrity: sha512-mIDEX2ek50x0OlRgxryxsenE5XaQD4on5U2inY7RApK3SOJpofyw7uW2AyfMKkhAxXIceo2DeWGVGwyvng1GNQ==}
     dev: true
 
   /unicorn-magic@0.1.0:
@@ -3541,7 +3541,7 @@ packages:
       builtins: 5.0.1
     dev: true
 
-  /vite-node@2.0.4(@types/node@20.14.11):
+  /vite-node@2.0.4(@types/node@22.0.0):
     resolution: {integrity: sha512-ZpJVkxcakYtig5iakNeL7N3trufe3M6vGuzYAr4GsbCTwobDeyPJpE4cjDhhPluv8OvQCFzu2LWp6GkoKRITXA==}
     engines: {node: ^18.0.0 || >=20.0.0}
     hasBin: true
@@ -3550,7 +3550,7 @@ packages:
       debug: 4.3.5
       pathe: 1.1.2
       tinyrainbow: 1.2.0
-      vite: 5.3.5(@types/node@20.14.11)
+      vite: 5.3.5(@types/node@22.0.0)
     transitivePeerDependencies:
       - '@types/node'
       - less
@@ -3562,7 +3562,7 @@ packages:
       - terser
     dev: true
 
-  /vite@5.3.5(@types/node@20.14.11):
+  /vite@5.3.5(@types/node@22.0.0):
     resolution: {integrity: sha512-MdjglKR6AQXQb9JGiS7Rc2wC6uMjcm7Go/NHNO63EwiJXfuk9PgqiP/n5IDJCziMkfw9n4Ubp7lttNwz+8ZVKA==}
     engines: {node: ^18.0.0 || >=20.0.0}
     hasBin: true
@@ -3590,7 +3590,7 @@ packages:
       terser:
         optional: true
     dependencies:
-      '@types/node': 20.14.11
+      '@types/node': 22.0.0
       esbuild: 0.21.4
       postcss: 8.4.39
       rollup: 4.14.0
@@ -3598,7 +3598,7 @@ packages:
       fsevents: 2.3.3
     dev: true
 
-  /vitest@2.0.4(@types/node@20.14.11):
+  /vitest@2.0.4(@types/node@22.0.0):
     resolution: {integrity: sha512-luNLDpfsnxw5QSW4bISPe6tkxVvv5wn2BBs/PuDRkhXZ319doZyLOBr1sjfB5yCEpTiU7xCAdViM8TNVGPwoog==}
     engines: {node: ^18.0.0 || >=20.0.0}
     hasBin: true
@@ -3624,7 +3624,7 @@ packages:
         optional: true
     dependencies:
       '@ampproject/remapping': 2.3.0
-      '@types/node': 20.14.11
+      '@types/node': 22.0.0
       '@vitest/expect': 2.0.4
       '@vitest/pretty-format': 2.0.4
       '@vitest/runner': 2.0.4
@@ -3640,8 +3640,8 @@ packages:
       tinybench: 2.8.0
       tinypool: 1.0.0
       tinyrainbow: 1.2.0
-      vite: 5.3.5(@types/node@20.14.11)
-      vite-node: 2.0.4(@types/node@20.14.11)
+      vite: 5.3.5(@types/node@22.0.0)
+      vite-node: 2.0.4(@types/node@22.0.0)
       why-is-node-running: 2.3.0
     transitivePeerDependencies:
       - less
