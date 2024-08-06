@@ -30,7 +30,7 @@ devDependencies:
     version: 2.0.4(vitest@2.0.4)
   np:
     specifier: '*'
-    version: 10.0.6(typescript@5.5.4)
+    version: 10.0.7(typescript@5.5.4)
   prettier:
     specifier: 3.3.3
     version: 3.3.3
@@ -1769,6 +1769,7 @@ packages:
 
   /inflight@1.0.6:
     resolution: {integrity: sha512-k92I/b08q4wvFscXCLvqfsHCrjrF7yiXsQuIVvVE7N82W3+aqpzuUdBbfhWcy/FZR3/4IgflMgKLOsvPDrGCJA==}
+    deprecated: This module is not supported, and leaks memory. Do not use it. Check out lru-cache if you want a good and tested way to coalesce async requests by a key value, which is much more comprehensive and powerful.
     dependencies:
       once: 1.4.0
       wrappy: 1.0.2
@@ -2464,8 +2465,8 @@ packages:
     engines: {node: '>=14.16'}
     dev: true
 
-  /np@10.0.6(typescript@5.5.4):
-    resolution: {integrity: sha512-173uUvFDmHtme1ra3JDMjYzqa94XHJAHoNae6lCA4mJWMIz073x9FE2O8SHMMjKXlHetRdOXufLUjdimRxXR3A==}
+  /np@10.0.7(typescript@5.5.4):
+    resolution: {integrity: sha512-vIPKQwOYKpQU40PU5x/vLfN2haj8ObxMvR1QGt7EZnBPWdm4WEbHdumYAnMV7AeR9kACsMqcqAP37sAo5cW5jA==}
     engines: {git: '>=2.11.0', node: '>=18', npm: '>=9', pnpm: '>=8', yarn: '>=1.7.0'}
     hasBin: true
     dependencies:
