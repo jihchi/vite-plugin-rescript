@@ -55,7 +55,7 @@
     "sort-package-json": "^2.10.0",
     "tsup": "^8.1.0",
     "typescript": "^5.5.4",
-    "vite": "^5.4.1",
+    "vite": "^5.4.2",
     "vitest": "^2.0.5"
   },
   "peerDependencies": {
