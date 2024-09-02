@@ -38,8 +38,8 @@ devDependencies:
     specifier: ^6.0.1
     version: 6.0.1
   sort-package-json:
-    specifier: ^2.10.0
-    version: 2.10.0
+    specifier: ^2.10.1
+    version: 2.10.1
   tsup:
     specifier: ^8.1.0
     version: 8.1.0(typescript@5.5.4)
@@ -3284,8 +3284,8 @@ packages:
     resolution: {integrity: sha512-855pvK+VkU7PaKYPc+Jjnmt4EzejQHyhhF33q31qG8x7maDzkeFhAAThdCYay11CISO+qAMwjOBP+fPZe0IPyg==}
     dev: true
 
-  /sort-package-json@2.10.0:
-    resolution: {integrity: sha512-MYecfvObMwJjjJskhxYfuOADkXp1ZMMnCFC8yhp+9HDsk7HhR336hd7eiBs96lTXfiqmUNI+WQCeCMRBhl251g==}
+  /sort-package-json@2.10.1:
+    resolution: {integrity: sha512-d76wfhgUuGypKqY72Unm5LFnMpACbdxXsLPcL27pOsSrmVqH3PztFp1uq+Z22suk15h7vXmTesuh2aEjdCqb5w==}
     hasBin: true
     dependencies:
       detect-indent: 7.0.1
