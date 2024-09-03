@@ -52,7 +52,7 @@
     "np": "*",
     "prettier": "3.3.3",
     "rimraf": "^6.0.1",
-    "sort-package-json": "^2.10.0",
+    "sort-package-json": "^2.10.1",
     "tsup": "^8.1.0",
     "typescript": "^5.5.4",
     "vite": "^5.4.2",
