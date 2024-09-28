@@ -30,7 +30,7 @@ devDependencies:
     version: 2.0.5(vitest@2.0.5)
   np:
     specifier: '*'
-    version: 10.0.7(typescript@5.5.4)
+    version: 10.0.7(typescript@5.6.2)
   prettier:
     specifier: 3.3.3
     version: 3.3.3
@@ -42,10 +42,10 @@ devDependencies:
     version: 2.10.1
   tsup:
     specifier: ^8.1.0
-    version: 8.1.0(typescript@5.5.4)
+    version: 8.1.0(typescript@5.6.2)
   typescript:
-    specifier: ^5.5.4
-    version: 5.5.4
+    specifier: ^5.6.2
+    version: 5.6.2
   vite:
     specifier: ^5.4.7
     version: 5.4.7(@types/node@22.5.5)
@@ -1227,7 +1227,7 @@ packages:
       xdg-basedir: 5.1.0
     dev: true
 
-  /cosmiconfig@8.3.6(typescript@5.5.4):
+  /cosmiconfig@8.3.6(typescript@5.6.2):
     resolution: {integrity: sha512-kcZ6+W5QzcJ3P1Mt+83OUv/oHFqZHIx8DuxG6eZ5RGMERoLqp4BuGjhHLYGK+Kf5XVkQvqBSmAy/nGWN3qDgEA==}
     engines: {node: '>=14'}
     peerDependencies:
@@ -1240,7 +1240,7 @@ packages:
       js-yaml: 4.1.0
       parse-json: 5.2.0
       path-type: 4.0.0
-      typescript: 5.5.4
+      typescript: 5.6.2
     dev: true
 
   /cross-spawn@7.0.3:
@@ -2593,14 +2593,14 @@ packages:
     engines: {node: '>=14.16'}
     dev: true
 
-  /np@10.0.7(typescript@5.5.4):
+  /np@10.0.7(typescript@5.6.2):
     resolution: {integrity: sha512-vIPKQwOYKpQU40PU5x/vLfN2haj8ObxMvR1QGt7EZnBPWdm4WEbHdumYAnMV7AeR9kACsMqcqAP37sAo5cW5jA==}
     engines: {git: '>=2.11.0', node: '>=18', npm: '>=9', pnpm: '>=8', yarn: '>=1.7.0'}
     hasBin: true
     dependencies:
       chalk: 5.3.0
       chalk-template: 1.1.0
-      cosmiconfig: 8.3.6(typescript@5.5.4)
+      cosmiconfig: 8.3.6(typescript@5.6.2)
       del: 7.1.0
       escape-goat: 4.0.0
       escape-string-regexp: 5.0.0
@@ -3576,7 +3576,7 @@ packages:
     resolution: {integrity: sha512-AEYxH93jGFPn/a2iVAwW87VuUIkR1FVUKB77NwMF7nBTDkDrrT/Hpt/IrCJ0QXhW27jTBDcf5ZY7w6RiqTMw2Q==}
     dev: true
 
-  /tsup@8.1.0(typescript@5.5.4):
+  /tsup@8.1.0(typescript@5.6.2):
     resolution: {integrity: sha512-UFdfCAXukax+U6KzeTNO2kAARHcWxmKsnvSPXUcfA1D+kU05XDccCrkffCQpFaWDsZfV0jMyTsxU39VfCp6EOg==}
     engines: {node: '>=18'}
     hasBin: true
@@ -3609,7 +3609,7 @@ packages:
       source-map: 0.8.0-beta.0
       sucrase: 3.35.0
       tree-kill: 1.2.2
-      typescript: 5.5.4
+      typescript: 5.6.2
     transitivePeerDependencies:
       - supports-color
       - ts-node
@@ -3646,8 +3646,8 @@ packages:
       is-typedarray: 1.0.0
     dev: true
 
-  /typescript@5.5.4:
-    resolution: {integrity: sha512-Mtq29sKDAEYP7aljRgtPOpTvOfbwRWlS6dPRzwjdE+C0R4brX/GUyhHSecbHMFLNBLcJIPt9nl9yG5TZ1weH+Q==}
+  /typescript@5.6.2:
+    resolution: {integrity: sha512-NW8ByodCSNCwZeghjN3o+JX5OFH0Ojg6sadjEKY4huZ52TqbJTJnDo5+Tw98lSy63NZvi4n+ez5m2u5d4PkZyw==}
     engines: {node: '>=14.17'}
     hasBin: true
     dev: true
