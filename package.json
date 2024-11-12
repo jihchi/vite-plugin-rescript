@@ -18,9 +18,14 @@
   "type": "module",
   "exports": {
     ".": {
-      "types": "./dist/index.d.ts",
-      "require": "./dist/index.cjs",
-      "import": "./dist/index.js"
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
     }
   },
   "main": "./dist/index.cjs",
@@ -37,33 +42,33 @@
     "prepack": "pnpm build",
     "release": "np",
     "start": "pnpm build -- --watch",
-    "test": "vitest run",
+    "test": "vitest",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "chalk": "^5.3.0",
-    "execa": "^8.0.1",
+    "execa": "^9.5.1",
     "npm-run-path": "^6.0.0"
   },
   "devDependencies": {
     "@sindresorhus/tsconfig": "^6.0.0",
-    "@types/node": "^22.8.1",
-    "@vitest/coverage-v8": "^2.0.5",
+    "@types/node": "^22.9.0",
+    "@vitest/coverage-v8": "^2.1.4",
     "np": "*",
     "prettier": "3.3.3",
     "rimraf": "^6.0.1",
     "sort-package-json": "^2.10.1",
-    "tsup": "^8.1.0",
+    "tsup": "^8.3.5",
     "typescript": "^5.6.3",
-    "vite": "^5.4.10",
-    "vitest": "^2.0.5"
+    "vite": "^5.4.11",
+    "vitest": "^2.1.4"
   },
   "peerDependencies": {
     "rescript": ">=9",
     "vite": ">=5.1.0"
   },
-  "packageManager": "pnpm@8.11.0",
+  "packageManager": "pnpm@9.12.3",
   "engines": {
-    "node": ">=16.0"
+    "node": ">=18.0"
   }
 }
