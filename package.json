@@ -50,7 +50,7 @@
     "@types/node": "^22.13.4",
     "@vitest/coverage-v8": "^2.0.5",
     "np": "*",
-    "prettier": "3.5.1",
+    "prettier": "3.5.2",
     "rimraf": "^6.0.1",
     "sort-package-json": "^2.14.0",
     "tsup": "^8.1.0",
