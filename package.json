@@ -18,9 +18,14 @@
   "type": "module",
   "exports": {
     ".": {
-      "types": "./dist/index.d.ts",
-      "require": "./dist/index.cjs",
-      "import": "./dist/index.js"
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
     }
   },
   "main": "./dist/index.cjs",
@@ -43,29 +48,36 @@
     "typecheck": "tsc"
   },
   "dependencies": {
-    "chalk": "^5.3.0",
-    "execa": "^8.0.1",
-    "npm-run-path": "^5.3.0"
+    "chalk": "^5.4.1",
+    "execa": "^9.5.1",
+    "npm-run-path": "^6.0.0"
   },
   "devDependencies": {
     "@biomejs/biome": "^1.7.1",
-    "@sindresorhus/tsconfig": "^5.0.0",
-    "@types/node": "^20.12.7",
-    "@vitest/coverage-v8": "^1.5.0",
+    "@sindresorhus/tsconfig": "^7.0.0",
+    "@types/node": "^22.13.10",
+    "@vitest/coverage-v8": "^2.1.4",
     "np": "*",
-    "rimraf": "^5.0.5",
-    "sort-package-json": "^2.10.0",
-    "tsup": "^8.0.2",
-    "typescript": "^5.4.5",
-    "vite": "^5.2.10",
-    "vitest": "^1.5.0"
+    "rimraf": "^6.0.1",
+    "sort-package-json": "^3.0.0",
+    "tsup": "^8.3.5",
+    "typescript": "^5.8.2",
+    "vite": "^5.4.11",
+    "vitest": "^2.1.4"
   },
   "peerDependencies": {
     "rescript": ">=9",
     "vite": ">=5.1.0"
   },
-  "packageManager": "pnpm@9.0.5+sha512.a722575c18fd791f9ef71e387c6e16cc03c90d859b9b0998d0428ca0e3220828b32a96e6de73cea34edbc0f50824771b1a69c7ea36b86daa3b89c7e6d9a3d912",
+  "packageManager": "pnpm@10.6.5",
   "engines": {
     "node": ">=18.0"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "@biomejs/biome",
+      "esbuild",
+      "rescript"
+    ]
   }
 }
