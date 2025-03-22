@@ -62,8 +62,14 @@
     "rescript": ">=9",
     "vite": ">=5.1.0"
   },
-  "packageManager": "pnpm@8.11.0",
+  "packageManager": "pnpm@10.6.5",
   "engines": {
-    "node": ">=16.0"
+    "node": ">=18.0"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "esbuild",
+      "rescript"
+    ]
   }
 }
