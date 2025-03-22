@@ -18,9 +18,14 @@
   "type": "module",
   "exports": {
     ".": {
-      "types": "./dist/index.d.ts",
-      "require": "./dist/index.cjs",
-      "import": "./dist/index.js"
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
     }
   },
   "main": "./dist/index.cjs",
@@ -42,21 +47,21 @@
   },
   "dependencies": {
     "chalk": "^5.4.1",
-    "execa": "^8.0.1",
+    "execa": "^9.5.1",
     "npm-run-path": "^6.0.0"
   },
   "devDependencies": {
     "@sindresorhus/tsconfig": "^7.0.0",
     "@types/node": "^22.13.10",
-    "@vitest/coverage-v8": "^2.0.5",
+    "@vitest/coverage-v8": "^2.1.4",
     "np": "*",
     "prettier": "3.5.3",
     "rimraf": "^6.0.1",
     "sort-package-json": "^3.0.0",
-    "tsup": "^8.1.0",
+    "tsup": "^8.3.5",
     "typescript": "^5.8.2",
     "vite": "^5.4.11",
-    "vitest": "^2.0.5"
+    "vitest": "^2.1.4"
   },
   "peerDependencies": {
     "rescript": ">=9",
