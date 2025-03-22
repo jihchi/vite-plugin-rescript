@@ -1,9 +1,9 @@
-import { EOL } from "node:os";
-import { describe, expect, it } from "vitest";
-import parseCompilerLog from "../src/parseCompilerLog.js";
+import { EOL } from 'node:os';
+import { describe, expect, it } from 'vitest';
+import parseCompilerLog from '../src/parseCompilerLog.js';
 
-const start = "#Start(1638790229265)";
-const done = "#Done(1638790229437)";
+const start = '#Start(1638790229265)';
+const done = '#Done(1638790229437)';
 
 const warning = `
   Warning number 27
@@ -106,101 +106,101 @@ function expectParseCompilerLog(...sections: string[]) {
   return expect(parseCompilerLog(sections.join(EOL).replace(/\n/g, EOL)));
 }
 
-describe("@jihchi/vite-plugin-rescript/overlay", () => {
-  it("returns null for empty string", () => {
-    expectParseCompilerLog("").toBe(null);
+describe('@jihchi/vite-plugin-rescript/overlay', () => {
+  it('returns null for empty string', () => {
+    expectParseCompilerLog('').toBe(null);
   });
 
-  it("returns null when compiler has just started", () => {
+  it('returns null when compiler has just started', () => {
     expectParseCompilerLog(start).toBe(null);
   });
 
-  it("returns null when compiler is not yet done", () => {
+  it('returns null when compiler is not yet done', () => {
     expectParseCompilerLog(start, error).toBe(null);
   });
 
-  it("returns null when compiler log contains no errors", () => {
+  it('returns null when compiler log contains no errors', () => {
     expectParseCompilerLog(start, done).toBe(null);
   });
 
-  it("returns null when compiler log contains only warning", () => {
+  it('returns null when compiler log contains only warning', () => {
     expectParseCompilerLog(start, warning, done).toBe(null);
   });
 
-  it("returns error when compiler log contains error", () => {
+  it('returns error when compiler log contains error', () => {
     expectParseCompilerLog(start, error, done).toEqual({
       message: "The value whoops can't be found",
-      stack: "",
-      id: "/path/to/file.res:3:3-8",
+      stack: '',
+      id: '/path/to/file.res:3:3-8',
       frame: errorFrame,
     });
   });
 
-  it("returns error when compiler log contains syntax error", () => {
+  it('returns error when compiler log contains syntax error', () => {
     expectParseCompilerLog(start, syntaxError, done).toEqual({
-      message: "Did you forget a `]` here?",
-      stack: "",
-      id: "/path/to/file.res:3:20",
+      message: 'Did you forget a `]` here?',
+      stack: '',
+      id: '/path/to/file.res:3:20',
       frame: syntaxErrorFrame,
     });
   });
 
-  it("returns error when compiler log contains warning configured as error", () => {
+  it('returns error when compiler log contains warning configured as error', () => {
     expectParseCompilerLog(start, warningError, done).toEqual({
-      message: "unused variable status.",
-      stack: "",
-      id: "/path/to/file.res:2:13-18",
+      message: 'unused variable status.',
+      stack: '',
+      id: '/path/to/file.res:2:13-18',
       frame: warningErrorFrame,
     });
   });
 
-  it("returns error without frame pointer when path has no location", () => {
+  it('returns error without frame pointer when path has no location', () => {
     expectParseCompilerLog(start, ppxError, done).toEqual({
-      message: "Something went wrong...",
-      stack: "",
-      id: "/path/to/file.res",
+      message: 'Something went wrong...',
+      stack: '',
+      id: '/path/to/file.res',
       frame: ppxErrorFrame,
     });
   });
 
-  it("returns error when compiler log contains error and warning", () => {
+  it('returns error when compiler log contains error and warning', () => {
     expectParseCompilerLog(start, error, warning, done).toEqual({
       message: "The value whoops can't be found",
-      stack: "",
-      id: "/path/to/file.res:3:3-8",
+      stack: '',
+      id: '/path/to/file.res:3:3-8',
       frame: errorFrame,
     });
   });
 
-  it("returns error when compiler log contains error with odd vertical bars", () => {
+  it('returns error when compiler log contains error with odd vertical bars', () => {
     expectParseCompilerLog(
       start,
-      error.replace("│", "┆"),
+      error.replace('│', '┆'),
       warning,
       done,
     ).toEqual({
       message: "The value whoops can't be found",
-      stack: "",
-      id: "/path/to/file.res:3:3-8",
+      stack: '',
+      id: '/path/to/file.res:3:3-8',
       frame: errorFrame,
     });
   });
 
-  it("returns only the first error", () => {
+  it('returns only the first error', () => {
     expectParseCompilerLog(start, error, syntaxError, done).toEqual({
       message: "The value whoops can't be found",
-      stack: "",
-      id: "/path/to/file.res:3:3-8",
+      stack: '',
+      id: '/path/to/file.res:3:3-8',
       frame: errorFrame,
     });
   });
 
-  it("returns error with multiple messages", () => {
-    const hint = "  Did you mean whooops?";
+  it('returns error with multiple messages', () => {
+    const hint = '  Did you mean whooops?';
     expectParseCompilerLog(start, error, hint, done).toEqual({
       message: "The value whoops can't be found\nDid you mean whooops?",
-      stack: "",
-      id: "/path/to/file.res:3:3-8",
+      stack: '',
+      id: '/path/to/file.res:3:3-8',
       frame: errorFrame,
     });
   });

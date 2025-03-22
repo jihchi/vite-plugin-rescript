@@ -1,14 +1,14 @@
-import { existsSync } from "node:fs";
-import * as fs from "node:fs/promises";
-import * as path from "node:path";
-import type { Readable } from "node:stream";
-import chalk from "chalk";
-import { execaCommand } from "execa";
-import { npmRunPathEnv } from "npm-run-path";
-import type { Plugin } from "vite";
-import parseCompilerLog from "./parseCompilerLog.js";
+import { existsSync } from 'node:fs';
+import * as fs from 'node:fs/promises';
+import * as path from 'node:path';
+import type { Readable } from 'node:stream';
+import chalk from 'chalk';
+import { execaCommand } from 'execa';
+import { npmRunPathEnv } from 'npm-run-path';
+import type { Plugin } from 'vite';
+import parseCompilerLog from './parseCompilerLog.js';
 
-const logPrefix = chalk.cyan("[@jihchi/vite-plugin-rescript]");
+const logPrefix = chalk.cyan('[@jihchi/vite-plugin-rescript]');
 
 type ReScriptProcess = {
   shutdown: () => void;
@@ -19,8 +19,8 @@ async function launchReScript(
   silent: boolean,
 ): Promise<ReScriptProcess> {
   const cmd = watch
-    ? "rescript build -with-deps -w"
-    : "rescript build -with-deps";
+    ? 'rescript build -with-deps -w'
+    : 'rescript build -with-deps';
 
   const result = execaCommand(cmd, {
     env: npmRunPathEnv(),
@@ -38,14 +38,14 @@ async function launchReScript(
       // eslint-disable-next-line no-console
       console.log(logPrefix, output);
     }
-    if (watch && output.includes(">>>> Finish compiling")) {
+    if (watch && output.includes('>>>> Finish compiling')) {
       compileOnce(true);
     }
   }
 
   const { stdout, stderr } = result;
-  stdout?.on("data", dataListener);
-  stderr?.on("data", dataListener);
+  stdout?.on('data', dataListener);
+  stderr?.on('data', dataListener);
 
   if (watch) {
     await new Promise((resolve) => {
@@ -78,14 +78,14 @@ export default function createReScriptPlugin(config?: Config): Plugin {
   let childProcessReScript: undefined | ReScriptProcess;
 
   // Retrieve config
-  const output = config?.loader?.output ?? "./lib/es6";
-  const suffix = config?.loader?.suffix ?? ".bs.js";
-  const suffixRegex = new RegExp(`${suffix.replace(".", "\\.")}$`);
+  const output = config?.loader?.output ?? './lib/es6';
+  const suffix = config?.loader?.suffix ?? '.bs.js';
+  const suffixRegex = new RegExp(`${suffix.replace('.', '\\.')}$`);
   const silent = config?.silent ?? false;
 
   return {
-    name: "@jihchi/vite-plugin-rescript",
-    enforce: "pre",
+    name: '@jihchi/vite-plugin-rescript',
+    enforce: 'pre',
     async configResolved(resolvedConfig) {
       root = resolvedConfig.root;
 
@@ -93,16 +93,16 @@ export default function createReScriptPlugin(config?: Config): Plugin {
 
       // exclude "vite preview [--mode <mode>]"
       const isOnlyDevServerLaunching =
-        command === "serve" && !Object.hasOwn(inlineConfig, "preview");
+        command === 'serve' && !Object.hasOwn(inlineConfig, 'preview');
 
-      const isBuildForProduction = command === "build";
+      const isBuildForProduction = command === 'build';
 
       const needReScript = isOnlyDevServerLaunching || isBuildForProduction;
 
       // The watch command can only be run by one process at the same time.
-      const isLocked = existsSync(path.resolve("./.bsb.lock"));
+      const isLocked = existsSync(path.resolve('./.bsb.lock'));
 
-      const watch = !isLocked && (command === "serve" || Boolean(build.watch));
+      const watch = !isLocked && (command === 'serve' || Boolean(build.watch));
 
       if (needReScript) {
         childProcessReScript = await launchReScript(watch, silent);
@@ -113,32 +113,32 @@ export default function createReScriptPlugin(config?: Config): Plugin {
         // If the build watcher is enabled (adding watch config would automatically enable it),
         // exclude rescript files since recompilation should be based on the generated JS files.
         watch: userConfig.build?.watch
-          ? { exclude: ["**/*.res", "**/*.resi"] }
+          ? { exclude: ['**/*.res', '**/*.resi'] }
           : null,
       },
       server: {
         watch: {
           // Ignore rescript files when watching since they may occasionally trigger hot update
-          ignored: ["**/*.res", "**/*.resi"],
+          ignored: ['**/*.res', '**/*.resi'],
         },
       },
     }),
     configureServer(server) {
       // Manually find and parse log file after server start since
       // initial compilation does not trigger handleHotUpdate.
-      fs.readFile(path.resolve("./lib/bs/.compiler.log"), "utf8").then(
+      fs.readFile(path.resolve('./lib/bs/.compiler.log'), 'utf8').then(
         (data) => {
           const log = data.toString();
           const err = parseCompilerLog(log);
-          if (err) server.hot.send({ type: "error", err });
+          if (err) server.hot.send({ type: 'error', err });
         },
       );
     },
     // Hook that resolves `.bs.js` imports to their `.res` counterpart
     async resolveId(source, importer, options) {
-      if (source.endsWith(".res")) usingLoader = true;
+      if (source.endsWith('.res')) usingLoader = true;
       if (options.isEntry || !importer) return null;
-      if (!importer.endsWith(".res")) return null;
+      if (!importer.endsWith('.res')) return null;
       if (!source.endsWith(suffix)) return null;
       if (path.isAbsolute(source)) return null;
 
@@ -154,7 +154,7 @@ export default function createReScriptPlugin(config?: Config): Plugin {
       }
 
       // Only replace the last occurrence
-      const resFile = source.replace(suffixRegex, ".res");
+      const resFile = source.replace(suffixRegex, '.res');
       const id = path.join(dirname, resFile);
 
       // Enable other plugins to resolve the file
@@ -174,7 +174,7 @@ export default function createReScriptPlugin(config?: Config): Plugin {
     },
     // Hook that loads the generated `.bs.js` file from `lib/es6` for ReScript files
     async load(id) {
-      if (!id.endsWith(".res")) return null;
+      if (!id.endsWith('.res')) return null;
 
       // Find the path to the generated js file
       const relativePath = path.relative(root, id);
@@ -186,7 +186,7 @@ export default function createReScriptPlugin(config?: Config): Plugin {
       this.addWatchFile(filePath);
 
       // Read the file content and return the code
-      return { code: await fs.readFile(filePath, "utf8") };
+      return { code: await fs.readFile(filePath, 'utf8') };
     },
     async handleHotUpdate({ file, read, server }) {
       // HMR is not automatically triggered when using the ReScript file loader.
@@ -195,15 +195,15 @@ export default function createReScriptPlugin(config?: Config): Plugin {
       if (usingLoader && file.endsWith(suffix)) {
         const lib = path.resolve(output);
         const relativePath = path.relative(lib, file);
-        if (relativePath.startsWith("..")) return;
-        const resFile = relativePath.replace(suffixRegex, ".res");
+        if (relativePath.startsWith('..')) return;
+        const resFile = relativePath.replace(suffixRegex, '.res');
         const id = path.join(root, resFile);
         const moduleNode = server.moduleGraph.getModuleById(id);
         if (moduleNode) return [moduleNode];
-      } else if (file.endsWith(".compiler.log")) {
+      } else if (file.endsWith('.compiler.log')) {
         const log = await read();
         const err = parseCompilerLog(log);
-        if (err) server.hot.send({ type: "error", err });
+        if (err) server.hot.send({ type: 'error', err });
       }
 
       return;
