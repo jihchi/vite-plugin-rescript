@@ -14,7 +14,7 @@ describe('@jihchi/vite-plugin-rescript', () => {
     expect(actual).toHaveProperty('closeBundle');
     await expect(
       // @ts-expect-error
-      actual.closeBundle()
+      actual.closeBundle(),
     ).resolves.toEqual(undefined);
   });
 });

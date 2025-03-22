@@ -1,11 +1,11 @@
-import * as path from 'path';
-import { existsSync } from 'fs';
-import * as fs from 'fs/promises';
-import { Plugin } from 'vite';
+import { existsSync } from 'node:fs';
+import * as fs from 'node:fs/promises';
+import * as path from 'node:path';
+import type { Readable } from 'node:stream';
+import chalk from 'chalk';
 import { execaCommand } from 'execa';
 import { npmRunPathEnv } from 'npm-run-path';
-import * as stream from 'stream';
-import chalk from 'chalk';
+import type { Plugin } from 'vite';
 import parseCompilerLog from './parseCompilerLog.js';
 
 const logPrefix = chalk.cyan('[@jihchi/vite-plugin-rescript]');
@@ -16,7 +16,7 @@ type ReScriptProcess = {
 
 async function launchReScript(
   watch: boolean,
-  silent: boolean
+  silent: boolean,
 ): Promise<ReScriptProcess> {
   const cmd = watch
     ? 'rescript build -with-deps -w'
@@ -32,7 +32,7 @@ async function launchReScript(
 
   let compileOnce = (_value: unknown) => {};
 
-  function dataListener(chunk: stream.Readable) {
+  function dataListener(chunk: Readable) {
     const output = chunk.toString().trimEnd();
     if (!silent) {
       // eslint-disable-next-line no-console
@@ -44,8 +44,8 @@ async function launchReScript(
   }
 
   const { stdout, stderr } = result;
-  stdout && stdout.on('data', dataListener);
-  stderr && stderr.on('data', dataListener);
+  stdout?.on('data', dataListener);
+  stderr?.on('data', dataListener);
 
   if (watch) {
     await new Promise((resolve) => {
@@ -93,7 +93,7 @@ export default function createReScriptPlugin(config?: Config): Plugin {
 
       // exclude "vite preview [--mode <mode>]"
       const isOnlyDevServerLaunching =
-        command === 'serve' && !inlineConfig.hasOwnProperty('preview');
+        command === 'serve' && !Object.hasOwn(inlineConfig, 'preview');
 
       const isBuildForProduction = command === 'build';
 
@@ -131,7 +131,7 @@ export default function createReScriptPlugin(config?: Config): Plugin {
           const log = data.toString();
           const err = parseCompilerLog(log);
           if (err) server.hot.send({ type: 'error', err });
-        }
+        },
       );
     },
     // Hook that resolves `.bs.js` imports to their `.res` counterpart

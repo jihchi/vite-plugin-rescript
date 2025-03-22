@@ -1,10 +1,10 @@
 name: CI
+
 on: [push, pull_request]
+
 jobs:
   build:
     name: Build, lint, and test on Node ${{ matrix.node }} and ${{ matrix.os }}
-
-    runs-on: ${{ matrix.os }}
 
     strategy:
       matrix:
@@ -12,26 +12,37 @@ jobs:
         os: [ubuntu-latest, windows-latest, macos-latest]
       fail-fast: false
 
+    runs-on: ${{ matrix.os }}
+
     steps:
+      - name: Set git to use LF
+        run: |
+          git config --global core.autocrlf false
+          git config --global core.eol lf
+
       - name: Checkout repo
         uses: actions/checkout@v4
 
       - uses: pnpm/action-setup@v4
 
-      - name: Use Node ${{ matrix.node }}
+      - name: Set-up Node.js ${{ matrix.node }}
         uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node }}
+          check-latest: true
           cache: pnpm
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
+      - name: CI checks with Biome
+        run: pnpm run ci
+
       - name: Typecheck
-        run: pnpm typecheck
+        run: pnpm run typecheck
 
       - name: Test
-        run: pnpm test -- --coverage
+        run: pnpm run test -- --coverage
 
       - name: Build
-        run: pnpm build
+        run: pnpm run build

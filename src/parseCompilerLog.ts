@@ -1,5 +1,5 @@
-import { ErrorPayload } from 'vite';
-import { EOL } from 'os';
+import { EOL } from 'node:os';
+import type { ErrorPayload } from 'vite';
 
 const ruler = '—'.repeat(80);
 
@@ -7,7 +7,7 @@ const ruler = '—'.repeat(80);
 const fileAndRangeRegex = /(.+):(\d+):(\d+)(-(\d+)(:(\d+))?)?$/;
 
 // https://github.com/rescript-lang/rescript-vscode/blob/7ab2d231f91fee2f93cbf6cae1b38f94c06a58c1/server/src/utils.ts#L433
-const codeRegex = /^  +([0-9]+| +|\.) (│|┆)/;
+const codeRegex = /^ {2,}([0-9]+| +|\.) (│|┆)/;
 
 // Compiler can treat warnings as hard errors based on `warnings` object in bsconfig.json
 const warningErrorRegex = /Warning number \d+ \(configured as error\)/;
@@ -26,7 +26,7 @@ function isErrorLine(line: string | undefined) {
  * @returns Error object to send to the client or null.
  */
 export default function parseCompilerLog(
-  log: string
+  log: string,
 ): ErrorPayload['err'] | null {
   // Split by line endings and remove empty lines
   const lines = log.split(EOL).filter(Boolean);

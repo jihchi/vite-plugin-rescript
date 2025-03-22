@@ -1,4 +1,4 @@
-import { EOL } from 'os';
+import { EOL } from 'node:os';
 import { describe, expect, it } from 'vitest';
 import parseCompilerLog from '../src/parseCompilerLog.js';
 
@@ -44,7 +44,7 @@ const syntaxError = `
 `;
 
 const warningError = `
-  Warning number 27 (configured as error) 
+  Warning number 27 (configured as error)
   /path/to/file.res:2:13-18
 
   1 │ @react.component
@@ -177,7 +177,7 @@ describe('@jihchi/vite-plugin-rescript/overlay', () => {
       start,
       error.replace('│', '┆'),
       warning,
-      done
+      done,
     ).toEqual({
       message: "The value whoops can't be found",
       stack: '',
