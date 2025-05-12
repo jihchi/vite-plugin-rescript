@@ -49,7 +49,7 @@
   },
   "dependencies": {
     "chalk": "^5.4.1",
-    "execa": "^9.5.1",
+    "execa": "^9.5.3",
     "npm-run-path": "^6.0.0"
   },
   "devDependencies": {
