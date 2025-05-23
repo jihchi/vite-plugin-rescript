@@ -19,17 +19,14 @@ async function launchReScript(
   silent: boolean,
   rewatch: boolean,
 ): Promise<ReScriptProcess> {
-  let cmd, finishSignal: string;
+  let cmd: string;
+  let finishSignal: string;
   if (rewatch) {
-    cmd = watch
-      ? 'rewatch watch'
-      : 'rewatch build';
-    finishSignal = 'Finished initial compilation'
+    cmd = watch ? 'rewatch watch' : 'rewatch build';
+    finishSignal = 'Finished initial compilation';
   } else {
-    cmd = watch
-      ? 'rescript build -with-deps -w'
-      : 'rescript build -with-deps';
-    finishSignal = '>>>> Finish compiling'
+    cmd = watch ? 'rescript build -with-deps -w' : 'rescript build -with-deps';
+    finishSignal = '>>>> Finish compiling';
   }
 
   const result = execaCommand(cmd, {
@@ -40,7 +37,7 @@ async function launchReScript(
     cwd: process.cwd(),
   });
 
-  let compileOnce = (_value: unknown) => { };
+  let compileOnce = (_value: unknown) => {};
 
   function dataListener(chunk: Readable) {
     const output = chunk.toString().trimEnd();
