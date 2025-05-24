@@ -75,6 +75,7 @@ export default defineConfig({
         suffix: '.mjs',
       },
       silent: false,
+      rewatch: false,
     }),
   ],
 });
