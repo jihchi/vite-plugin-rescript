@@ -1,29 +1,34 @@
 {
   "$schema": "node_modules/@biomejs/biome/configuration_schema.json",
-  "files": {
-    "ignore": ["package.json", "pnpm-lock.yaml"]
+  "vcs": {
+    "enabled": true,
+    "clientKind": "git",
+    "useIgnoreFile": true,
+    "defaultBranch": "main"
+  },
+  "linter": {
+    "enabled": true,
+    "domains": {
+      "project": "recommended",
+      "test": "recommended"
+    },
+    "rules": {
+      "recommended": true
+    }
   },
   "formatter": {
     "enabled": true,
-    "indentStyle": "space"
+    "useEditorconfig": true
+  },
+  "assist": {
+    "enabled": true,
+    "actions": {
+      "recommended": true
+    }
   },
   "javascript": {
     "formatter": {
       "quoteStyle": "single"
     }
-  },
-  "linter": {
-    "enabled": true,
-    "rules": {
-      "recommended": true
-    }
-  },
-  "organizeImports": {
-    "enabled": true
-  },
-  "vcs": {
-    "clientKind": "git",
-    "enabled": true,
-    "useIgnoreFile": true
   }
 }
