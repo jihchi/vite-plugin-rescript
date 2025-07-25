@@ -69,7 +69,7 @@
     "rescript": ">=9",
     "vite": ">=5.1.0"
   },
-  "packageManager": "pnpm@10.6.5",
+  "packageManager": "pnpm@10.13.1",
   "engines": {
     "node": ">=18.0"
   },
