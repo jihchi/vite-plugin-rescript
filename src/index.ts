@@ -158,7 +158,7 @@ export default function createReScriptPlugin(config?: Config): Plugin {
         // Check if the source is a node module or an existing file
         require.resolve(source, { paths: [dirname] });
         return null;
-      } catch (err) {
+      } catch {
         // empty catch
       }
 
