@@ -9,10 +9,7 @@
     "BuckleScript"
   ],
   "homepage": "https://github.com/jihchi/vite-plugin-rescript",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/jihchi/vite-plugin-rescript.git"
-  },
+  "repository": "github:jihchi/vite-plugin-rescript",
   "license": "MIT",
   "author": "jihchi",
   "type": "module",
@@ -36,14 +33,14 @@
   ],
   "scripts": {
     "prebuild": "pnpm clean",
-    "build": "tsup",
+    "build": "tsdown",
     "ci": "biome ci .",
     "clean": "rimraf dist",
     "format": "sort-package-json && biome format --write .",
     "lint": "biome lint .",
     "prepack": "pnpm build",
     "release": "np",
-    "start": "pnpm build -- --watch",
+    "start": "pnpm build --watch",
     "test": "vitest run",
     "typecheck": "tsc"
   },
@@ -60,7 +57,7 @@
     "np": "*",
     "rimraf": "^6.0.1",
     "sort-package-json": "^3.4.0",
-    "tsup": "^8.5.0",
+    "tsdown": "^0.13.1",
     "typescript": "^5.9.2",
     "vite": "^7.1.1",
     "vitest": "^3.2.4"
@@ -69,7 +66,7 @@
     "rescript": ">=9",
     "vite": ">=5.1.0"
   },
-  "packageManager": "pnpm@10.13.1",
+  "packageManager": "pnpm@10.14.0",
   "engines": {
     "node": ">=18.0"
   },
