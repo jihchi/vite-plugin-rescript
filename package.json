@@ -54,7 +54,7 @@
     "@sindresorhus/tsconfig": "^8.0.1",
     "@types/node": "^24.3.3",
     "@vitest/coverage-v8": "^3.2.4",
-    "np": "*",
+    "np": "^10.2.0",
     "rimraf": "^6.0.1",
     "sort-package-json": "^3.4.0",
     "tsdown": "^0.15.1",
@@ -66,7 +66,7 @@
     "rescript": ">=12.0.0-beta.4",
     "vite": ">=5.1.0"
   },
-  "packageManager": "pnpm@10.14.0",
+  "packageManager": "pnpm@10.16.0",
   "engines": {
     "node": ">=20"
   },
