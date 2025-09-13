@@ -19,7 +19,9 @@ async function launchReScript(
   silent: boolean,
 ): Promise<ReScriptProcess> {
   const cmd = watch ? 'rescript watch' : 'rescript build';
-  const finishSignal = '>>>> Finish compiling';
+
+  // https://github.com/rescript-lang/rescript/blob/9676953f5b5ce96ade6909af3f23a77cd69645e9/rewatch/src/watcher.rs#L246-L258
+  const finishSignal = 'Finished initial compilation';
 
   const result = execaCommand(cmd, {
     env: npmRunPathEnv(),
