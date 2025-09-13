@@ -18,8 +18,8 @@ importers:
         specifier: ^6.0.0
         version: 6.0.0
       rescript:
-        specifier: '>=9'
-        version: 11.1.4
+        specifier: '>=12.0.0-beta.4'
+        version: 12.0.0-beta.11
     devDependencies:
       '@biomejs/biome':
         specifier: ^2.2.4
@@ -508,6 +508,39 @@ packages:
 
   '@quansync/fs@0.1.5':
     resolution: {integrity: sha512-lNS9hL2aS2NZgNW7BBj+6EBl4rOf8l+tQ0eRY6JWCI8jI2kc53gSoqbjojU0OnAWhzoXiOjFyGsHcDGePB3lhA==}
+
+  '@rescript/darwin-arm64@12.0.0-beta.11':
+    resolution: {integrity: sha512-O0n5c1jUQScSB3Glzgv7Tb+ZpwkqoCg+aBlmvRmx1yoAKEAUoSM86DKjFCggDOgGQhl4WMcEDd/x36FGEs/tLQ==}
+    engines: {node: '>=20.11.0'}
+    cpu: [arm64]
+    os: [darwin]
+
+  '@rescript/darwin-x64@12.0.0-beta.11':
+    resolution: {integrity: sha512-1V+uKSl5R5ZJLjNkTZk13042wGf/lKVb82jszyYomti+QGY3BDyEKFu6dfjSZlpoehGIVaYv1wiNDOc//GrNiw==}
+    engines: {node: '>=20.11.0'}
+    cpu: [x64]
+    os: [darwin]
+
+  '@rescript/linux-arm64@12.0.0-beta.11':
+    resolution: {integrity: sha512-nH472aeEmhq2W9rBYJznwCnMsbiW8+h7JA+NIvRugBapU3QQfaZ2moAh+iWji6IcfayhDaUDRLPCccusRug1nA==}
+    engines: {node: '>=20.11.0'}
+    cpu: [arm64]
+    os: [linux]
+
+  '@rescript/linux-x64@12.0.0-beta.11':
+    resolution: {integrity: sha512-G6GrLLqrm79AEj7zTbtsodeT+HQmS4awMiwzCsAT+Q3qNOFHdJFGZwzNtU5N6qGn/lBQeLidSQn0uqlG9iH4Ug==}
+    engines: {node: '>=20.11.0'}
+    cpu: [x64]
+    os: [linux]
+
+  '@rescript/runtime@12.0.0-beta.11':
+    resolution: {integrity: sha512-oOVu3IPvkHsL+bCBpQnWRoIg/n0h91mWwDXQ9q5eyBsNr4uqeWt+KcAxhyfYy54Gh07dSJh5FkPz6f/Fbpk3Kg==}
+
+  '@rescript/win32-x64@12.0.0-beta.11':
+    resolution: {integrity: sha512-H7kjiEv9FHTN0FtXa17f0DdeQreKcQEFoggWsLzvk6pKNqkz+dcg/yNgZEHwRUQIjuIE3fQ+du8390vkGxeEWw==}
+    engines: {node: '>=20.11.0'}
+    cpu: [x64]
+    os: [win32]
 
   '@rolldown/binding-android-arm64@1.0.0-beta.37':
     resolution: {integrity: sha512-Pdr3USGBdoYzcygfJTSATHd7x476vVF3rnQ6SuUAh4YjhgGoNaI/ZycQ0RsonptwwU5NmQRWxfWv+aUPL6JlJg==}
@@ -1830,9 +1863,9 @@ packages:
     resolution: {integrity: sha512-+crtS5QjFRqFCoQmvGduwYWEBng99ZvmFvF+cUJkGYF1L1BfU8C6Zp9T7f5vPAwyLkUExpvK+ANVZmGU49qi4Q==}
     engines: {node: '>=12'}
 
-  rescript@11.1.4:
-    resolution: {integrity: sha512-0bGU0bocihjSC6MsE3TMjHjY0EUpchyrREquLS8VsZ3ohSMD+VHUEwimEfB3kpBI1vYkw3UFZ3WD8R28guz/Vw==}
-    engines: {node: '>=10'}
+  rescript@12.0.0-beta.11:
+    resolution: {integrity: sha512-oH1LB44+V4vu0YCy8YlK3Y4kuWJx9JvdJ1mTd00Rj340RawfAHDTmfPfvbheecgz7UdGLEj13IID9auJ3KHfVA==}
+    engines: {node: '>=20.11.0'}
     hasBin: true
 
   resolve-cwd@3.0.0:
@@ -2688,6 +2721,23 @@ snapshots:
   '@quansync/fs@0.1.5':
     dependencies:
       quansync: 0.2.11
+
+  '@rescript/darwin-arm64@12.0.0-beta.11':
+    optional: true
+
+  '@rescript/darwin-x64@12.0.0-beta.11':
+    optional: true
+
+  '@rescript/linux-arm64@12.0.0-beta.11':
+    optional: true
+
+  '@rescript/linux-x64@12.0.0-beta.11':
+    optional: true
+
+  '@rescript/runtime@12.0.0-beta.11': {}
+
+  '@rescript/win32-x64@12.0.0-beta.11':
+    optional: true
 
   '@rolldown/binding-android-arm64@1.0.0-beta.37':
     optional: true
@@ -3937,7 +3987,15 @@ snapshots:
     dependencies:
       rc: 1.2.8
 
-  rescript@11.1.4: {}
+  rescript@12.0.0-beta.11:
+    dependencies:
+      '@rescript/runtime': 12.0.0-beta.11
+    optionalDependencies:
+      '@rescript/darwin-arm64': 12.0.0-beta.11
+      '@rescript/darwin-x64': 12.0.0-beta.11
+      '@rescript/linux-arm64': 12.0.0-beta.11
+      '@rescript/linux-x64': 12.0.0-beta.11
+      '@rescript/win32-x64': 12.0.0-beta.11
 
   resolve-cwd@3.0.0:
     dependencies:

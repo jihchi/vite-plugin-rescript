@@ -63,7 +63,7 @@
     "vitest": "^3.2.4"
   },
   "peerDependencies": {
-    "rescript": ">=9",
+    "rescript": ">=12.0.0-beta.4",
     "vite": ">=5.1.0"
   },
   "packageManager": "pnpm@10.14.0",
