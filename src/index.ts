@@ -71,6 +71,7 @@ interface Config {
     suffix?: string;
   };
   silent?: boolean;
+  skipBuild?: boolean;
 }
 
 export default function createReScriptPlugin(config?: Config): Plugin {
@@ -83,6 +84,7 @@ export default function createReScriptPlugin(config?: Config): Plugin {
   const suffix = config?.loader?.suffix ?? '.bs.js';
   const suffixRegex = new RegExp(`${suffix.replace('.', '\\.')}$`);
   const silent = config?.silent ?? false;
+  const skipBuild = config?.skipBuild ?? false;
 
   return {
     name: '@jihchi/vite-plugin-rescript',
@@ -105,7 +107,7 @@ export default function createReScriptPlugin(config?: Config): Plugin {
 
       const watch = !isLocked && (command === 'serve' || Boolean(build.watch));
 
-      if (needReScript) {
+      if (needReScript && !skipBuild) {
         childProcessReScript = await launchReScript(watch, silent);
       }
     },
