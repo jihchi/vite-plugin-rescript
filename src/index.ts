@@ -17,9 +17,9 @@ type ReScriptProcess = {
 async function launchReScript(
   watch: boolean,
   silent: boolean,
+  buildArgs: string,
 ): Promise<ReScriptProcess> {
-  const cmd = watch ? 'rescript watch' : 'rescript build';
-
+  const cmd = (watch ? 'rescript watch' : 'rescript build') + ' ' + buildArgs;
   // https://github.com/rescript-lang/rescript/blob/9676953f5b5ce96ade6909af3f23a77cd69645e9/rewatch/src/watcher.rs#L246-L258
   const finishSignal = 'Finished initial compilation';
 
@@ -71,6 +71,7 @@ interface Config {
     suffix?: string;
   };
   silent?: boolean;
+  buildArgs?: string;
 }
 
 export default function createReScriptPlugin(config?: Config): Plugin {
@@ -83,6 +84,7 @@ export default function createReScriptPlugin(config?: Config): Plugin {
   const suffix = config?.loader?.suffix ?? '.bs.js';
   const suffixRegex = new RegExp(`${suffix.replace('.', '\\.')}$`);
   const silent = config?.silent ?? false;
+  const buildArgs = config?.buildArgs ?? '';
 
   return {
     name: '@jihchi/vite-plugin-rescript',
@@ -106,7 +108,7 @@ export default function createReScriptPlugin(config?: Config): Plugin {
       const watch = !isLocked && (command === 'serve' || Boolean(build.watch));
 
       if (needReScript) {
-        childProcessReScript = await launchReScript(watch, silent);
+        childProcessReScript = await launchReScript(watch, silent, buildArgs);
       }
     },
     config: (userConfig) => ({

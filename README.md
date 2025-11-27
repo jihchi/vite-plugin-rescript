@@ -75,6 +75,7 @@ export default defineConfig({
         suffix: '.mjs',
       },
       silent: false,
+      buildArgs: '-warn-error +32+27+26+110',
     }),
   ],
 });
