@@ -17,7 +17,7 @@ type ReScriptProcess = {
 async function launchReScript(
   watch: boolean,
   silent: boolean,
-  buildArgs: string
+  buildArgs: string,
 ): Promise<ReScriptProcess> {
   let cmd = watch ? 'rescript watch' : 'rescript build';
 
