@@ -17,9 +17,14 @@ type ReScriptProcess = {
 async function launchReScript(
   watch: boolean,
   silent: boolean,
-  buildArgs: string,
+  buildArgs: string
 ): Promise<ReScriptProcess> {
-  const cmd = (watch ? 'rescript watch' : 'rescript build') + ' ' + buildArgs;
+  let cmd = watch ? 'rescript watch' : 'rescript build';
+
+  if (buildArgs) {
+    cmd += ` ${buildArgs}`;
+  }
+
   // https://github.com/rescript-lang/rescript/blob/9676953f5b5ce96ade6909af3f23a77cd69645e9/rewatch/src/watcher.rs#L246-L258
   const finishSignal = 'Finished initial compilation';
 

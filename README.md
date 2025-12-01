@@ -74,7 +74,12 @@ export default defineConfig({
         output: './lib/js',
         suffix: '.mjs',
       },
+
+      // Control the terminal output of the ReScript compiler.
       silent: false,
+
+      // Optionally add additional build args to the ReScript compiler.
+      // See https://rescript-lang.org/docs/manual/build-overview#compile-with-stricter-errors-in-ci
       buildArgs: '-warn-error +32+27+26+110',
     }),
   ],
