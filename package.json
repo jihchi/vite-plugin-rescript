@@ -46,20 +46,20 @@
   },
   "dependencies": {
     "chalk": "^5.6.2",
-    "execa": "^9.6.0",
+    "execa": "^9.6.1",
     "npm-run-path": "^6.0.0"
   },
   "devDependencies": {
-    "@biomejs/biome": "^2.3.7",
+    "@biomejs/biome": "^2.3.8",
     "@sindresorhus/tsconfig": "^8.1.0",
     "@types/node": "^24.10.1",
     "@vitest/coverage-v8": "^3.2.4",
     "np": "*",
     "rimraf": "^6.1.2",
-    "sort-package-json": "^3.4.0",
-    "tsdown": "^0.16.6",
+    "sort-package-json": "^3.5.1",
+    "tsdown": "^0.17.1",
     "typescript": "^5.9.3",
-    "vite": "^7.2.4",
+    "vite": "^7.2.7",
     "vitest": "^3.2.4"
   },
   "peerDependencies": {
