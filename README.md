@@ -80,7 +80,7 @@ export default defineConfig({
 
       // Optionally add additional build args to the ReScript compiler.
       // See https://rescript-lang.org/docs/manual/build-overview#compile-with-stricter-errors-in-ci
-      buildArgs: '-warn-error +32+27+26+110',
+      buildArgs: '--warn-error +32+27+26+110',
     }),
   ],
 });
