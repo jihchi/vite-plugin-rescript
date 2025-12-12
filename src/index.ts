@@ -18,6 +18,7 @@ async function launchReScript(
   watch: boolean,
   silent: boolean,
   rewatch: boolean,
+  buildArgs: string,
 ): Promise<ReScriptProcess> {
   let cmd: string;
   let finishSignal: string;
@@ -27,6 +28,10 @@ async function launchReScript(
   } else {
     cmd = watch ? 'rescript build -with-deps -w' : 'rescript build -with-deps';
     finishSignal = '>>>> Finish compiling';
+  }
+
+  if (buildArgs) {
+    cmd += ` ${buildArgs}`;
   }
 
   const result = execaCommand(cmd, {
@@ -78,6 +83,7 @@ interface Config {
   };
   silent?: boolean;
   rewatch?: boolean;
+  buildArgs?: string;
 }
 
 export default function createReScriptPlugin(config?: Config): Plugin {
@@ -91,6 +97,7 @@ export default function createReScriptPlugin(config?: Config): Plugin {
   const suffixRegex = new RegExp(`${suffix.replace('.', '\\.')}$`);
   const silent = config?.silent ?? false;
   const rewatch = config?.rewatch ?? false;
+  const buildArgs = config?.buildArgs ?? '';
 
   return {
     name: '@jihchi/vite-plugin-rescript',
@@ -114,7 +121,7 @@ export default function createReScriptPlugin(config?: Config): Plugin {
       const watch = !isLocked && (command === 'serve' || Boolean(build.watch));
 
       if (needReScript) {
-        childProcessReScript = await launchReScript(watch, silent, rewatch);
+        childProcessReScript = await launchReScript(watch, silent, rewatch, buildArgs);
       }
     },
     config: (userConfig) => ({
