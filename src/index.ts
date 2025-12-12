@@ -121,7 +121,12 @@ export default function createReScriptPlugin(config?: Config): Plugin {
       const watch = !isLocked && (command === 'serve' || Boolean(build.watch));
 
       if (needReScript) {
-        childProcessReScript = await launchReScript(watch, silent, rewatch, buildArgs);
+        childProcessReScript = await launchReScript(
+          watch,
+          silent,
+          rewatch,
+          buildArgs,
+        );
       }
     },
     config: (userConfig) => ({
