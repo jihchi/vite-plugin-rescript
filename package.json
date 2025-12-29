@@ -57,7 +57,7 @@
     "np": "*",
     "rimraf": "^6.1.2",
     "sort-package-json": "^3.6.0",
-    "tsdown": "^0.18.2",
+    "tsdown": "^0.18.3",
     "typescript": "^5.9.3",
     "vite": "^7.3.0",
     "vitest": "^3.2.4"
