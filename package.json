@@ -52,14 +52,14 @@
   "devDependencies": {
     "@biomejs/biome": "^2.3.11",
     "@sindresorhus/tsconfig": "^8.1.0",
-    "@types/node": "^25.0.3",
+    "@types/node": "^25.0.6",
     "@vitest/coverage-v8": "^3.2.4",
     "np": "*",
     "rimraf": "^6.1.2",
     "sort-package-json": "^3.6.0",
-    "tsdown": "^0.18.4",
+    "tsdown": "^0.19.0",
     "typescript": "^5.9.3",
-    "vite": "^7.3.0",
+    "vite": "^7.3.1",
     "vitest": "^3.2.4"
   },
   "peerDependencies": {
