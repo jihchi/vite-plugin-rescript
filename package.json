@@ -52,7 +52,7 @@
   "devDependencies": {
     "@biomejs/biome": "^2.3.11",
     "@sindresorhus/tsconfig": "^8.1.0",
-    "@types/node": "^25.0.6",
+    "@types/node": "^25.0.9",
     "@vitest/coverage-v8": "^3.2.4",
     "np": "*",
     "rimraf": "^6.1.2",
