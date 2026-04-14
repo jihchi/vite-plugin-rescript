@@ -50,16 +50,16 @@
     "npm-run-path": "^6.0.0"
   },
   "devDependencies": {
-    "@biomejs/biome": "^2.4.10",
+    "@biomejs/biome": "^2.4.11",
     "@sindresorhus/tsconfig": "^8.1.0",
-    "@types/node": "^25.5.2",
+    "@types/node": "^25.6.0",
     "@vitest/coverage-v8": "^3.2.4",
     "np": "*",
     "rimraf": "^6.1.3",
     "sort-package-json": "^3.6.1",
-    "tsdown": "^0.21.7",
+    "tsdown": "^0.21.8",
     "typescript": "^6.0.2",
-    "vite": "^8.0.5",
+    "vite": "^8.0.8",
     "vitest": "^3.2.4"
   },
   "peerDependencies": {
